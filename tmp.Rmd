@@ -1,0 +1,21 @@
+## 5. Algoritmo
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{Possivelmente infecta alguns indivíduos.}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{netsim, iters}
+\Output{data}
+\BlankLine
+steps = 1:iters\;
+\For {at in steps} {
+    data := progress(data, at)\;
+    data := infect(data, at)\;
+    \eIf{condition}{
+        instructions2\;
+    }{
+        instructions3\;
+    }
+}
+\caption{epi}
+\end{algorithm} 

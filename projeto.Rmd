@@ -1,0 +1,195 @@
+---
+title: ""
+output: 
+  pdf_document
+#    citation_package: natbib
+documentclass: abntex2
+biblio-style: abntex2-alf
+bibliography: bibliografia.bib
+header-includes:
+  - \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+  - \usepackage{indentfirst}
+indent: true
+---
+
+```{r chunks, echo = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  fig.align = "center",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r libs}
+library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
+library(xml2)
+```
+
+```{r ufmg, out.width="20%", out.height="20%"}
+knitr::include_graphics("imagens/brasao.jpg")
+```
+
+\begin{center}
+Universidade Federal de Minas Gerais
+\linebreak
+Instituto de Ciências Exatas
+\linebreak
+Departamento de Estatística
+\end{center}
+
+# Projeto de monografia
+
+**Título**: Modelo epidemiológico com compartimentos SEIQHRF em redes: implementação e inferência via MCMC  
+**Aluno**: Luís Fernando Israel Assunção  
+**Orientador**: Adrian Pablo Hinojosa Luna
+
+## 1. Introdução
+
+O avanço de epidemias em populações fechadas é um problema que pode ser 
+modelado como um processo Markoviano temporal com um número finito de estados, 
+também chamados de compartimentos [@kendall]. As estimativas fornecidas por 
+esses modelos sob o efeito de diferentes intervenções informam a construção de 
+políticas públicas eficientes no combate às doenças estudadas.
+
+No último ano, muitos modelos foram propostos para estimar a propagação e 
+os impactos da COVID-19 (Coronavirus Disease 2019). 
+Uma das propostas para capturar os efeitos sociais e estruturais da pandemia é 
+utilizar o conjunto de estados SEIQHRF 
+(Susceptible-Exposed-Quarantined-Hospitalized-Recovered-Fatality) [@churches].  
+
+Na UFMG, o projeto *COVID-19: proposta de um modelo epidemiológico que 
+incorpora estruturas sociais de contágio* tem mapeado o grafo de relações 
+pessoais do Aglomerado da Serra em Belo Horizonte, com o objetivo de modelar a 
+progressão da COVID-19 em contextos de aglomerações urbanas. Esse projeto 
+motivou a implementação de modelos de redes utilizando os estados SEIQHRF 
+nesta monografia.
+
+## 2. Metodologia 
+
+### 2.1 Estados, infeccções e progressões
+
+Diferentes doenças e intervenções estão associadas a conjuntos de estados 
+distintos. Um conjunto de estados muito utilizado na literatura é o SIR 
+(Susceptible-Infected-Recovered) [@infectiousdiseases], onde:
+
+* *Susceptible*: suscetível à infecção;
+* *Infected*: infectado e sintomático. Pode infectar suscetível;
+* *Recovered*: recuperado.
+
+O SEIQHRF introduz quatro estados SIR:
+
+* *Exposed*: infectado e assintomático. Pode infectar o suscetível;
+* *Quarantined*: infectado e sintomático. Pode infectar o suscetível, com menor 
+probabilidade de encontro que os demais estados infectados;
+* *Hospitalized*: infectado e sintomático. Não encontra suscetíveis e tem maior 
+probabilidade de morte;
+* *Fatality*: morte.
+
+A Figura 1 ilustra os caminhos de infecção e progressão do SEIQHRF.
+
+ ```{r, out.width="40%", out.height="40%", fig.cap = "Infecções (linhas pontilhadas) e progressões (linhas sólidas) dos compartimentos SEIQHRF."}
+ 
+
+states <- c("s", "e", "i", "q", "h", "r", "f") 
+ids <- seq_along(states)
+names(ids) <- states
+edge_df <- create_edge_df(
+  from = ids[c('e', 'e', 'i', 'i', 'i', 'q', 'q', 'h', 'h', 's', 'e', 'i', 'q')],
+  to = ids[c('i', 'r', 'q', 'h', 'r', 'h', 'r', 'r', 'f', 'e', 's', 's', 's')],
+  color = "black",
+  style = rep(c("solid", "dashed"), c(10, 3))
+)
+seiqhrf <- create_graph() |> 
+  add_node(label = states, node_aes = node_aes(fillcolor = "white")) |> 
+  add_edge_df(edge_df)
+seiqhrf |> export_graph(path <- "images/seiqhrf.png", "png")
+knitr::include_graphics(path)
+```
+
+### 2.2 Tipos de modelos
+
+Existem três tipos de modelos que descrevem o processo de fluxo 
+entre compartimentos [@epimodel]: 
+
+1. **Deterministic Contact Models (DCM)**: modelos determinísticos a nível de 
+estado, nos quais equações diferenciais descrevem o fluxo entre compartimentos. 
+Essa classe de modelos possui soluções analíticas. Contudo, esses modelos são 
+macroscópicos e, portanto, não descrevem subpopulações (faixas etárias, por 
+exemplo), nem estruturas sociais;
+2. **Individual Contact Models (ICM)**: modelos estocásticos a nível de 
+indivíduo. Não há soluções analíticas para essa classe de modelos, que são 
+ajustados por meio de algoritmos de Markov Chain Monte Carlo 
+[@stochasticepidemic].
+Cada indivíduo é inicializado em um estado, e a progressão entre estados 
+depende das probabilidades de contato e infecção entre pares de indivíduos. 
+Esses modelos podem descrever subpopulações, mas não descrevem estruturas 
+sociais complexas;
+3. **Network Models**: modelos estocásticos a nível de indivíduo. Essa classe 
+de modelos é similar à classe ICM. Contudo, os indivíduos são representados 
+como vértices de um grafo, e o contato é restrito a pares de vértices 
+conectados por arestas. Nesse sentido, são modelos mais adequados para 
+condicionar a progressão das infecções a estruturas sociais.
+
+Até a data da proposição desta monografia, existem apenas implementações de 
+ICM com os estados SEIQHRF. O foco da monografia será implementar e estudar 
+network models com os copartimentos em questão.
+
+### 2.3 Modelos exponenciais de grafos aleatórios
+
+Formalmente, um grafo aleatório $Y \in \mathcal{Y}$ consiste em um conjunto de 
+$n$ vértices e $m$ arestas $\{Y_{{ij}}:i=1,\dots ,n;j=1,\dots ,n\}$, no qual 
+$Y_{ij} = 1$ se os vértices $(i,j)$ são conectados e $Y_{ij} = 0$ caso 
+contrário.
+
+Exponential random graph models (ERGM) são um modelos da família exponencial 
+que descrevem grafos aleatórios. Um ERGM é definido como:
+
+$$
+{\displaystyle P(Y=y|\theta ) = 
+{\frac {\exp(\theta ^{T}s(y))}{c(\theta )}}
+,\quad \forall y\in {\mathcal {Y}}}
+$$
+
+onde $\theta$ é um vetor de parâmetros, 
+$s(y)$ é um vetor de estatísticas suficientes e 
+$c(\theta)$ é uma constante normalizadora.
+As estatísticas suficientes podem ser funções da rede, ou atributos dos 
+vértices.
+
+ERGMs são adequados para a modelagem de redes sociais [@ergmsn].
+
+## 3. Objetivos
+
+O objetivo principal deste trabalho é implementar o conjunto de estados em um 
+network model, utilizando a linguagem de programação R [@r] e os pacotes `ergm` 
+[@ergm] para a simulação de grafos e `EpiModel` [@epimodel] para o ajuste dos 
+modelos via MCMC. 
+
+O objetivo secundário é realizar simulações com dados sintéticos para validar 
+as inferências e a robustez do modelo, usando ERGMs com e sem subpopulações 
+de faixa etária. Além disso, há um terceiro objetivo, de rodar o modelo 
+utilizando os dados coletados no Aglomerado da Serra. Contudo, a factibilidade 
+desse terceiro objetivo depende do andamento do projeto em questão.
+
+# Referências
+
+<div id="refs"></div>
+
+\vspace*{\fill}
+
+\begin{center}
+Belo Horizonte, 25 de maio de 2021
+\linebreak
+\linebreak
+\noindent\rule{4cm}{0.4pt}
+\linebreak
+Luís Fernando Israel Assunção  
+\linebreak
+\linebreak
+\noindent\rule{4cm}{0.4pt}
+\linebreak
+Adrian Pablo Hinojosa Luna
+\end{center}

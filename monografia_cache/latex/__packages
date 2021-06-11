@@ -1,0 +1,11 @@
+base
+knitr
+DiagrammeR
+network
+ergm
+deSolve
+networkDynamic
+tergm
+tergmLite
+EpiModel
+kableExtra
