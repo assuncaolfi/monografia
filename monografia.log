@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.25)  9 JUN 2021 21:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.25)  26 AUG 2021 22:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1049,180 +1049,236 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.394 E
-       lemento opcional da \citeonline[4.2.1.2]{NBR14724:2011}. Exemplo: [2]
-
-LaTeX Warning: Citation `NBR14724:2011' on page 3 undefined on input line 394.
-
-[3
+l.404 
+       [2] [3
 
 ] [4
 
-] [5
+] [5] [6
 
-] [6
+] [7
 
-] [7] [8
+] [8
 
-] [9
-
-] [10
+] [9] [10
 
 ] [11] [12
-
-]
-
-LaTeX Warning: Citation `NBR6028:2003' on page 13 undefined on input line 526.
-
-[13] [14
 
 ] (/usr/share/texlive/texmf-dist/tex/generic/babel/locale/en/babel-english.tex
 Package babel Info: Importing basic data for english
 (babel)             from babel-en.ini. Reported on input line 11.
-) [15] [16
+) [13] [14
 
-] (./monografia.lof) [17] [18
+] (./monografia.lof) [15] [16
 
-] (./monografia.lot) [19] [20
+] (./monografia.lot) [17] [18
 
 ] (./monografia.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 38.
-) [21] [22
+(Font)              <10.95> on input line 40.
+) [19] [20
 
-] (./monografia.toc) [23] [24
+] (./monografia.toc) [21] [22
 
 ]
 
-LaTeX Warning: Citation `sidarthe' on page 25 undefined on input line 644.
+LaTeX Warning: Citation `sidarthe' on page 23 undefined on input line 598.
 
-[25] [26
+[23] [24
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 6
-73.
+27.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<monografia_files/figure-latex/sir-plot-1.pdf, id=252, 1003.75pt x 582.175pt>
-File: monografia_files/figure-latex/sir-plot-1.pdf Graphic file (type pdf)
-<use monografia_files/figure-latex/sir-plot-1.pdf>
-Package pdftex.def Info: monografia_files/figure-latex/sir-plot-1.pdf  used on 
-input line 684.
+
+LaTeX Warning: Reference `fig:sir-plot' on page 25 undefined on input line 637.
+
+
+<monografia_files/figure-latex/plot-sir-1.pdf, id=240, 1003.75pt x 582.175pt>
+File: monografia_files/figure-latex/plot-sir-1.pdf Graphic file (type pdf)
+<use monografia_files/figure-latex/plot-sir-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-sir-1.pdf  used on 
+input line 641.
 (pdftex.def)             Requested size: 316.24419pt x 183.42163pt.
 
-Underfull \vbox (badness 2689) has occurred while \output is active []
+Underfull \vbox (badness 1199) has occurred while \output is active []
 
-[27pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+[25pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.703 \]
-         <./monografia_files/figure-latex/sir-plot-1.pdf>]
+l.662 \]
+         <./monografia_files/figure-latex/plot-sir-1.pdf>]
 
-LaTeX Warning: Citation `infectiousdisases' on page 28 undefined on input line 
-710.
+LaTeX Warning: Citation `infectiousdisases' on page 26 undefined on input line 
+668.
 
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 7
-11.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
+70.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<monografia_files/figure-latex/compartment-plot-1.pdf, id=275, 469.755pt x 325.
+<monografia_files/figure-latex/plot-compartment-1.pdf, id=265, 469.755pt x 325.
 215pt>
-File: monografia_files/figure-latex/compartment-plot-1.pdf Graphic file (type p
+File: monografia_files/figure-latex/plot-compartment-1.pdf Graphic file (type p
 df)
-<use monografia_files/figure-latex/compartment-plot-1.pdf>
-Package pdftex.def Info: monografia_files/figure-latex/compartment-plot-1.pdf  
-used on input line 716.
+<use monografia_files/figure-latex/plot-compartment-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-compartment-1.pdf  
+used on input line 685.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
 
-LaTeX Warning: Citation `missing' on page 28 undefined on input line 733.
+LaTeX Warning: Citation `missing' on page 26 undefined on input line 703.
 
-[28pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
+[26pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.751   \textbf
-               {Quarantined}: infectado e sintom√°tico. Pode infectar o susc...
- <./monografia_files/figure-latex/compartment-plot-1.pdf>]
-<monografia_files/figure-latex/seiqhrf-plot-1.pdf, id=306, 1003.75pt x 582.175p
+l.707 \section
+              {SEIQHRF} <./monografia_files/figure-latex/plot-compartment-1.pdf
+>]
+<monografia_files/figure-latex/seiqhrf-plot-1.pdf, id=292, 1003.75pt x 582.175p
 t>
 File: monografia_files/figure-latex/seiqhrf-plot-1.pdf Graphic file (type pdf)
 <use monografia_files/figure-latex/seiqhrf-plot-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/seiqhrf-plot-1.pdf  used
- on input line 762.
+ on input line 730.
 (pdftex.def)             Requested size: 316.24419pt x 183.42163pt.
-[29pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
+[27pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.796 \chapter
+l.763 \chapter
               {Implementa√ß√£o} <./monografia_files/figure-latex/seiqhrf-plot-1
-.pdf>] [30
-
-] [31] [32
+.pdf>] [28
 
 ]
-<monografia_files/figure-latex/plot-magnolia-1.pdf, id=350, 469.755pt x 325.215
+
+LaTeX Warning: Citation `epimodel-gallery' on page 29 undefined on input line 7
+78.
+
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 795.
+
+LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 797.
+
+
+Overfull \vbox (0.237pt too high) detected at line 863
+ []
+
+[29]
+Underfull \vbox (badness 10000) detected at line 863
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 863
+ []
+
+[30] [31] [32]
+<monografia_files/figure-latex/plot-magnolia-1.pdf, id=348, 469.755pt x 325.215
 pt>
 File: monografia_files/figure-latex/plot-magnolia-1.pdf Graphic file (type pdf)
 
 <use monografia_files/figure-latex/plot-magnolia-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-magnolia-1.pdf  use
-d on input line 827.
+d on input line 947.
+(pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
+<monografia_files/figure-latex/plot-attr-distr-1.pdf, id=350, 469.755pt x 325.2
+15pt>
+File: monografia_files/figure-latex/plot-attr-distr-1.pdf Graphic file (type pd
+f)
+<use monografia_files/figure-latex/plot-attr-distr-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-attr-distr-1.pdf  u
+sed on input line 959.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
 
-Underfull \hbox (badness 2680) in paragraph at lines 838--842
+Underfull \hbox (badness 2680) in paragraph at lines 966--968
 []\T1/lmr/m/n/10 (+20) A do-cu-men-ta-Á„o do \T1/lmtt/m/n/10 ergm \T1/lmr/m/n/1
 0 (+20) con-tÈm de-ta-lhes so-bre o mo-delo uti-li-zado na si-mu-la-Á„o do
  []
 
+[33
 
-Overfull \hbox (47.66614pt too wide) in paragraph at lines 847--858
- [][] 
- []
-
-[33pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4
-}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) 
+has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.863 
-       <./monografia_files/figure-latex/plot-magnolia-1.pdf>]
-<monografia_files/figure-latex/plot-magnolia-sim-1.pdf, id=358, 469.755pt x 325
+l.982 \end{quote}
+                  <./monografia_files/figure-latex/plot-magnolia-1.pdf>] [34pdf
+TeX warning (ext4): destination with the same identifier (name{figure.4.5}) has
+ been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1065 
+        <./monografia_files/figure-latex/plot-attr-distr-1.pdf>]
+<monografia_files/figure-latex/plot-magnolia-sim-1.pdf, id=375, 469.755pt x 325
 .215pt>
 File: monografia_files/figure-latex/plot-magnolia-sim-1.pdf Graphic file (type 
 pdf)
 <use monografia_files/figure-latex/plot-magnolia-sim-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-magnolia-sim-1.pdf 
- used on input line 866.
+ used on input line 1068.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-[34pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}
+
+Underfull \vbox (badness 1259) has occurred while \output is active []
+
+[35pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.899 \chapter
-              {Resultados}pdfTeX warning (ext4): destination with the same iden
-tifier (name{figure.4.5}) has been already used, duplicate ignored
+l.1079 ## [1] 1.333333
+                      pdfTeX warning (ext4): destination with the same identifi
+er (name{figure.4.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.899 \chapter
-              {Resultados} <./monografia_files/figure-latex/plot-magnolia-sim-1
-.pdf>] [35pdfTeX warning (ext4): destination with the same identifier (name{tab
-le.4.2}) has been already used, duplicate ignored
+l.1079 ## [1] 1.333333
+                       <./monografia_files/figure-latex/plot-magnolia-sim-1.pdf
+>]
+<monografia_files/figure-latex/plot-degree-comp-1.pdf, id=385, 469.755pt x 325.
+215pt>
+File: monografia_files/figure-latex/plot-degree-comp-1.pdf Graphic file (type p
+df)
+<use monografia_files/figure-latex/plot-degree-comp-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-degree-comp-1.pdf  
+used on input line 1084.
+(pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
+
+LaTeX Warning: Reference `fig:tab-inf-pars' on page 36 undefined on input line 
+1103.
+
+<monografia_files/figure-latex/unnamed-chunk-10-1.pdf, id=388, 469.755pt x 325.
+215pt>
+File: monografia_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type p
+df)
+<use monografia_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/unnamed-chunk-10-1.pdf  
+used on input line 1128.
+(pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
+[36pdfTeX warning (ext4): destination with the same identifier (name{table.4.2}
+) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.899 \chapter
-              {Resultados}] [36
+l.1128 ...e-latex/unnamed-chunk-10-1} \end{center}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{figure.4.7}) has been already used, duplic
+ate ignored
 
-] [37] [38
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1128 ...e-latex/unnamed-chunk-10-1} \end{center}
+                                                   <./monografia_files/figure-l
+atex/plot-degree-comp-1.pdf>] [37 <./monografia_files/figure-latex/unnamed-chun
+k-10-1.pdf>] [38
 
 ] (./monografia.bbl (./monografia.brf)
 \tf@brf=\write6
@@ -1237,51 +1293,94 @@ bibitemlist
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 911.
+(hyperref)                removing `\uppercase' on input line 1143.
 
 [43
 
 ] [44]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 932.
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-985.
+1243.
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \vbox (badness 1360) detected at line 1100
+Underfull \vbox (badness 1360) detected at line 1582
  []
-
-
-Underfull \vbox (badness 1033) has occurred while \output is active []
 
 [45
 
 ]
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1582
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1582
  []
 
 [46]
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1582
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1582
  []
 
 [47]
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1582
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1582
  []
 
-[48] [49]
+[48]
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+[49]
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+[50]
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+[51]
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+[52]
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+[53]
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1582
+ []
+
+[54] [55]
 \tf@lof=\write7
 \openout7 = `monografia.lof'.
 
@@ -1291,47 +1390,46 @@ Underfull \vbox (badness 10000) detected at line 1100
 \tf@toc=\write9
 \openout9 = `monografia.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1103.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1103.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1585.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1585.
 (./monografia.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1103.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1103.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1585.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1585.
 
 Package rerunfilecheck Info: File `monografia.brf' has not changed.
-(rerunfilecheck)             Checksum: 088CD21D7B2ED42A97820FD5A7F7DCD3;942.
+(rerunfilecheck)             Checksum: AA38277CBD5713FB5C4D4BD8F693E163;933.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1103.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1585.
  ) 
 Here is how much of TeX's memory you used:
- 21459 strings out of 483090
- 322206 string characters out of 5963929
- 787991 words of memory out of 5000000
- 35849 multiletter control sequences out of 15000+600000
- 621416 words of font info for 138 fonts, out of 8000000 for 9000
+ 21498 strings out of 483090
+ 323531 string characters out of 5963929
+ 813577 words of memory out of 5000000
+ 35879 multiletter control sequences out of 15000+600000
+ 618781 words of font info for 138 fonts, out of 8000000 for 9000
  61 hyphenation exceptions out of 8191
- 42i,13n,42p,991b,551s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,13n,42p,991b,547s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/d
 vips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
 m-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.p
-fb></usr/share/texmf/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr
-/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/publi
-c/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texm
-f/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri
-8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/font
-s/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb
-></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/fonts/type
-1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/p
-ublic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb>
-Output written on monografia.pdf (51 pages, 1312674 bytes).
+onts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi7.p
+fb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/s
+hare/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/publi
+c/lm/lmri8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/l
+mss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy1
+0.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
+s/type1/public/lm/lmtko10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pf
+b></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb>
+Output written on monografia.pdf (57 pages, 1335770 bytes).
 PDF statistics:
- 651 PDF objects out of 1000 (max. 8388607)
- 560 compressed objects within 6 object streams
- 115 named destinations out of 1000 (max. 500000)
- 24842 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 710 PDF objects out of 1000 (max. 8388607)
+ 608 compressed objects within 7 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 24881 words of extra memory for PDF output out of 24883 (max. 10000000)
 
