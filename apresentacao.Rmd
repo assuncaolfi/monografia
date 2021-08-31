@@ -1,0 +1,811 @@
+---
+title: Modelo SEIQHRF em Redes
+subtitle: Departamento de Estatística da UFMG
+author: "Aluno: Luís Assunção, Orientador: Adrian Luna"
+output: 
+  beamer_presentation:
+    includes:
+      in_header: preamble-apr.tex
+---
+
+```{r chunks, set.seed(1995), echo = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE,
+  warning = FALSE,
+  cache = TRUE
+)
+COLORS <- RColorBrewer::brewer.pal(8, "Set2")
+USE_CACHE <- TRUE
+```
+
+# Introdução
+
+* Epidemias em populações fechadas podem ser modeladas como processos 
+markovianos com um número finito de estados
+
+* Na UFMG, há o projeto *COVID-19: proposta de um modelo epidemiológico que 
+incorpora estruturas sociais de contágio*
+
+* $SEIQHRF$ (Susceptible-Exposed-Quarantined-Hospitalized-Recovered-Fatality)
+
+# Metodologia
+
+## Conjuntos de estados
+
+* Compartimentalização de indivíduos de uma população
+
+### SIR
+
+* $SIR$ (Susceptible-Exposed-Recovered)
+* Conjunto utilizado para doenças infecciosas que conferem imunidade 
+vitalícia (caxumba, por exemplo)
+
+---
+
+```{r plot-sir, fig.cap = "SIR. Linhas pontilhadas são infecções e linhas sólidas são progressões."}
+library(DiagrammeR)
+
+plot_states <- function(states, edge_df) {
+  set.seed(0)
+  set <- paste(states, collapse = "")
+  path <- file.path("images", paste0(set, ".png"))
+  create_graph() |>
+    add_node(
+      label = states,
+      node_aes = node_aes(
+        color = "black",
+        fillcolor = COLORS[1],
+        fontcolor = "black",
+        height = 0.25,
+        width = 0.25
+      )
+    ) |>
+    add_edge_df(edge_df) |>
+    render_graph(layout = "fr")
+}
+
+states <- c("S", "I", "R")
+ids <- seq_along(states)
+names(ids) <- states
+edge_df <- create_edge_df(
+  from = ids[c("S", "I", "I")],
+  to = ids[c("I", "R", "S")],
+  style = c("solid", "solid", "dashed"),
+  color = "black"
+)
+plot_states(states, edge_df)
+```
+
+---
+
+### SEIQHRF
+
+* Susceptible-Exposed-Quarantined-Hospitalized-Recovered-Fatality
+* Criado para modelar as consequências sociais e estruturais da pandemia 
+do COVID-19
+
+---
+
+```{r seiqhrf-plot, fig.cap = "SEIQHRF. Linhas pontilhadas são infecções e linhas sólidas são progressões."} 
+states <- c("S", "E", "I", "Q", "H", "R", "F") 
+ids <- seq_along(states)
+names(ids) <- states
+from <- c('E', 'E', 'I', 'I', 'I', 'Q', 'Q', 'H', 'H', 'S', 'E', 'I', 'Q')
+to <- c('I', 'R', 'Q', 'H', 'R', 'H', 'R', 'R', 'F', 'E', 'S', 'S', 'S')
+edge_df <- create_edge_df(
+  from = ids[from], 
+  to = ids[to],
+  style = rep(c("solid", "dashed"), c(10, 3)),
+  color = "black"
+)
+plot_states(states, edge_df)
+```
+
+# Modelos epidemiológicos
+
+## Tipos
+
+* Determinísticos (equações diferenciais),
+* Estocásticos (processos estocásticos),
+* Em redes (simulações numéricas)
+
+---
+
+## Redes
+
+* Vantagem: expressam estruturas sociais complexas
+* Desvantagem: tempo computacional
+
+---
+
+* Implementamos simulações numéricas do $SEIQHRF$ em redes, mas para 
+simplificar a apresentação da metodologia, mostraremos as definições do $SIR$
+* Essas definições podem ser generalizadas para o $SEIQHRF$
+
+---
+
+### SIR em redes
+
+* Seja o grafo $Y = (E, V), Y \in \mathcal{Y}$
+* Vértices $V$ são indivíduos e arestas $E$ são relações
+
+---
+
+* Seja o processo $X_i(t) = S,I,R, \quad i\in V$
+
+$$
+\Pr(X_i(t + \delta t) = x_i'| X_i(t) = x_i) = 
+$$
+$$
+\begin{cases} \beta M_i(x)\delta t &\mbox{se } x_i = S \textrm{ e } x_i' = I \\
+\gamma  \delta t & \mbox{se } x_i = I \textrm{ e } x_i' = R \\
+ 1-[\beta M_i(x) + \gamma ]\delta t & \text{c.c,}
+\end{cases}
+$$
+
+* $M_i(x)$ é o número de vizinhos infectados do vértice $i$
+
+---
+
+## Grafos aleatórios
+
+$$\{\Pr_{\theta}(Y), Y \in \mathcal{Y}_n, \theta \in \Theta  \},$$
+
+$$\mathcal{Y}_n=\{Y = (E, V), |V| = n, Y \textrm{ simples}\}$$
+
+---
+
+## Exponential random graph models
+
+Sejam
+
+* $g : \mathcal{Y} \rightarrow \mathbb{R}^p$ estatísticas suficientes
+* $\theta \in \mathbb{R}^q$ um vetor de $q$ parâmetros 
+* $\eta(\theta) : \mathbb{R}^q \rightarrow \mathbb{R}^p$ parâmetros naturais 
+* O modelo exponencial para grafos aleatórios é definido como:
+
+$$
+\Pr_{\eta,g}(Y=y \vert \theta) = 
+\frac{
+    \exp(\eta(\theta) \cdot g(y))
+}{
+    c_{\eta,g}(\theta)
+}, \quad
+y \in \mathcal{Y}
+$$
+
+* No caso mais comum, tratado neste trabalho, $\eta(\theta) = \theta$.
+
+---
+
+## Temporal ERGM
+
+* ERGMs temporais
+* Sejam $g : \mathcal{Y}^2 \rightarrow \mathbb{R}^p$
+* A probabilidade de transição entre $y^{t-1}$ e $y^t$ é definida como:
+
+$$
+\Pr_{\eta,g}(Y^t = y^t \vert Y^{t-1} = y^{t-1};\theta) = 
+\frac{
+    \exp(\eta(\theta) \cdot g(y^t, y^{t-1}))
+}{
+    c_{\eta,g}(\theta, y^{t-1})
+}, \quad
+y^t, y^{t-1} \in \mathcal{Y}
+$$
+
+* Ajuste via Metropolis-Hastings MCMCMLE
+* São Separable TERGMs (STERGMs) quando os coeficientes de formação e dissolução 
+de arestas são independentes
+
+---
+
+# Implementação
+
+* Objetivo: implementar o $SEIQHRF$ em redes
+* Ferramentas: R, `ergm`, `EpiModel`
+
+---
+
+## ergm
+
+### Ajuste
+
+* `stergm(formula)`: ajuste do STERGM
+
+### Estatísticas
+
+* `edges`: número de arestas - tamanho do conjunto $\{(i, j)\}$
+* `nodematch(attr, diff = FALSE)`: homofilia uniforme - tamanho do conjunto 
+$\{(i, j) | \text{atributo}_i = \text{atributo}_j\}$
+* `nodematch(attr, diff = TRUE)` - homofilia diferencial.
+$p$ estatísticas da rede, onde $p$ é o tamanho do conjunto 
+$\{\text{atributos}\}$.
+$\{(i, j)\ | \text{atributo}_i = \text{atributo}_j = k\}$,
+onde o valor de $k$ é o menor valor único do atributo em questão.
+* `absdiff(attr)`  diferença absoluta - 
+$|\text{atributo}_i - \text{atributo}_j|$.
+* `gwesp(decay, fixed)`: ...
+
+---
+
+## EpiModel
+
+
+* API para ajustar modelos epidemiológicos
+* Modelos complexos são programados de forma modular (nosso caso)
+* Modelos comuns são triviais de se ajustar
+
+###  Exemplo SIR Determinístico vs. Estocástico
+* $N = 1000$, $\beta = 0.16$ e $\gamma = 0.02$
+* Quando $t = 0$, $S = 90$ e $I = 10$
+
+---
+
+```{r plot-compartment, fig.cap = "Comparação entre ajustes DCM (linhas sólidas) e ICM (linhas tracejadas)."}
+library(EpiModel)
+# set.seed(1995)
+
+# Parameters
+params <- list(
+  inf.prob = 0.2, act.rate = 0.8, rec.rate = 1/50,
+  a.rate = 1/100, ds.rate = 1/100, di.rate = 1/90, 
+  dr.rate = 1/100
+)
+N <- 1000
+inits <- list(s.num = N * 0.9, i.num = N * 0.1, r.num = 0)
+controls <- list(type = "SIR", nsteps = 365)
+
+# DCM
+param <- do.call(param.dcm, params)
+init <- do.call(init.dcm, inits)
+control <- do.call(control.dcm, controls)
+dcm_fit <- dcm(param, init, control)
+
+# ICM
+param <- do.call(param.icm, params)
+init <- do.call(init.icm, inits)
+control <- do.call(control.icm, controls)
+icm_fit <- icm(param, init, control)
+
+plot(
+  dcm_fit,
+  alpha = 0.75, lwd = 4, 
+  ylab = "Número", xlab = "Tempo"
+)
+plot(
+  icm_fit,
+  qnts = FALSE, sim.lines = FALSE, add = TRUE, 
+  mean.lty = 2, legend = FALSE
+)
+```
+
+---
+
+```{r plot-epi-diag, out.width = "100%", out.height = "100%", fig.cap = "Fluxograma da implementação."}
+fluxogram <- grViz("
+digraph boxes_and_circles {
+  # a 'graph' statement
+  graph [overlap = true, fontsize = 10]
+
+  # several 'node' statements
+  node [shape = box, fontname = Courier]
+  ergm; stergm; netest; netsim; infect; progress
+
+  node [shape = none, fontname = Helvetica, fixedsize = true, width = 0.9]
+
+  ergm -> netest
+  stergm -> netest
+  'Grafo\nObservado' -> netest
+  'Especificação\ndo STERGM' -> netest
+  netest -> 'Ajuste\ndo STERGM'
+  'Ajuste\ndo STERGM' -> netsim
+  infect -> netsim
+  progress -> netsim
+  'Parâmetros\nSEIQHRF' -> netsim
+  netsim -> 'Simulações\nepidemiológicas'
+}
+")
+fluxogram
+```
+
+---
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{Simulações epidemiológicas}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{
+    Ajuste do STERGM, 
+    Número de simulações, 
+    Tempo das simulações,
+    Função de infecção (infect),
+    Função de progressão (progress),
+    Parâmetros das funções de infecção e progressão
+}
+\Output{Lista de matrizes, cada uma representando uma simulação, 
+com o número de indivíduos em cada estado em cada tempo.}
+\BlankLine
+\For{simulacão = 1 até simulação = número de simulações}{
+    \For{simulacão = 1 até simulação = número de simulações}{
+        simular um STERGM a partir do ajuste\;
+        \For{tempo = 1 até tempo = tempo da simulação}{
+            formar ou dissolver arestas do STERGM\;
+            rodar o processo de infecção\; 
+            rodar o processo de progressão\;
+            salvar os resultados\;
+        }
+    }
+}
+\caption{netsim}
+\end{algorithm} 
+
+---
+
+# Simulações e resultados
+
+## Faux Magnolia High
+
+```{r}
+data(faux.magnolia.high)
+summary_magnolia <- summary(faux.magnolia.high)
+```
+
+* Disponível no `ergm`
+* Simulação de rede de rede de amigos de uma escola do sul dos EUA
+* Existem `r summary_magnolia$gal$n` alunos, e cada aluno tem três atributos:
+`Grade` (turma), `Race` (raça) e `Sex` (sexo)
+
+---
+
+```{r plot-magnolia, fig.cap = "Faux Magnolia High. À esquerda, apenas as arestas do grafo. À direita, os vértices coloridos de acordo com a turma do aluno."}
+library(ergm)
+plot_magnolia <- function(network, vertex_size = 0) {
+  set.seed(2)
+  plot(
+    network,
+    vertex.cex = vertex_size,
+    vertex.col = COLORS[get.node.attr(faux.magnolia.high, "Grade") - 5]
+  ) 
+}
+
+data(faux.magnolia.high)
+par(mar = rep(0, 4), mfrow = c(1, 2))
+plot_magnolia(faux.magnolia.high, 0)
+plot_magnolia(faux.magnolia.high, 1)
+```
+
+---
+
+```{r plot-attr-distr, fig.cap = "Proporções dos níveis de cada atributo do Faux Magnolia High."}
+plot_attribute_distribution <- function(attribute) {
+  tab <- table(get.node.attr(faux.magnolia.high, attribute))
+  barplot(prop.table(tab), names.arg = names(tab), main = attribute, col = COLORS[1], density = 50)
+}
+
+par(mfrow = c(2, 2))
+invisible(lapply(
+  c("Grade", "Race", "Sex"),
+  plot_attribute_distribution
+))
+```
+
+---
+
+## Ajuste do ERGM
+
+* Especificado na documentação do `faux.magnolia.high`
+
+```{r, echo = TRUE, eval = FALSE}
+magnolia ~ 
+  edges +
+  nodematch("Grade", diff = TRUE) + 
+  nodematch("Race", diff = TRUE) +
+  nodematch("Sex", diff = FALSE) + 
+  absdiff("Grade") + 
+  gwesp(0.25, fixed = TRUE)
+```
+
+```{r}
+library(EpiModel)
+
+magnolia_path <- file.path("models", "magnolia.rds")
+if (USE_CACHE && file.exists(magnolia_path)) {
+  magnolia <- readRDS(magnolia_path)
+} else {
+  formation <- 
+    ~
+    edges +
+    nodematch("Grade", diff = T) +
+    nodematch("Race", diff = T) +
+    nodematch("Sex", diff = F) +
+    absdiff("Grade") +
+    gwesp(0.25, fixed = T)
+  coef_diss <- dissolution_coefs(
+    dissolution = ~ offset(edges),
+    duration = 50
+  )
+  coef_diss$coef.crude <- -Inf
+  magnolia_fit <- ergm(
+    faux.magnolia.high ~ 
+      edges + nodematch("Grade", diff=T) + nodematch("Race", diff=T) +
+      nodematch("Sex",diff=F) + absdiff("Grade") + gwesp(0.25,fixed=T),
+    burnin = 10000, interval = 1000, MCMCsamplesize = 2500, maxit = 25,
+    control = control.ergm(steplength = 0.25, MCMLE.maxit = 100)
+  ) 
+  magnolia <- netest(
+    faux.magnolia.high,
+    formation = formation, 
+    target.stats = NULL,
+    coef.diss = coef_diss,
+    set.control.ergm = control.ergm(
+      MCMC.burnin = 10000,
+      MCMC.interval = 1000,
+      MCMC.samplesize = 2500,
+      MCMLE.steplength = 1,
+      MCMLE.maxit = 1
+    )
+  )
+  magnolia$fit <- magnolia_fit
+
+  saveRDS(magnolia, magnolia_path)
+}
+```
+
+---
+
+```{r tab-coefs-magnolia}
+library(data.table)
+library(kableExtra)
+
+coefs <- coef(magnolia$fit)
+coeftab <- data.table(coef = coefs)
+cols <- c("Estatística", "Fator", "Nível", "V4")
+coeftab[, (cols) := tstrsplit(names(coefs), "[.]")]
+coeftab[
+  Estatística %in% c("edges", "gwesp"),
+  `:=`(Fator = NA, Nível = NA)
+]
+coeftab[, Coeficiente := round(coef, 2)]
+coeftab[, OR := round(exp(coef), 2)]
+
+kable_styling(
+  kbl(
+    coeftab[, .(Estatística, Fator, Nível, Coeficiente, OR)],
+    caption = "Coeficientes do ajuste Magnolia.",
+    booktabs = FALSE
+  ),
+  font_size = 7
+)
+```
+
+---
+
+```{r plot-magnolia-sim, fig.cap = "Simulação gerada com nosso ajuste do Faux Magnolia High. À esquerda, apenas as arestas do grafo. À direita, os vértices coloridos de acordo com a turma do aluno."}
+magnolia_sim <- simulate(
+  magnolia$fit,
+  nsim = 1,
+  burnin = 100000000,
+  constraint = "ConstantEdges"
+) 
+
+par(mar = rep(0, 4), mfrow = c(1, 2))
+plot_magnolia(magnolia_sim, 0)
+plot_magnolia(magnolia_sim, 1)
+```
+
+---
+
+```{r plot-degree-comp, fig.cap = "Comparação entre as distribuições de grau do grafo original e da simulação."}
+data(faux.magnolia.high)
+A <- as.matrix(faux.magnolia.high)
+original_degrees <- rowSums(A)
+A <- as.matrix(magnolia_sim)
+sim_degrees <- rowSums(A)
+original_tab <- c(prop.table(table(original_degrees)), 0)
+sim_tab <- prop.table(table(sim_degrees))
+barplot(
+  matrix(c(original_tab, sim_tab), nrow = 2, byrow = TRUE),
+  legend = c("original", "simulação"),
+  beside = TRUE,
+  density = c(0, 50),
+  col = COLORS[1]
+)
+```
+
+---
+
+```{r}
+# library(parallel)
+# 
+# n_cores <- detectCores()
+# eff_cores <- if (n_cores > 4) 4 else n_cores
+# dx <- netdx(
+#   magnolia, 
+#   nsims = eff_cores,
+#   nsteps = 365,
+#   # set.control.ergm = control.simulate.ergm(
+#   #   MCMC.burnin = 1e5,
+#   #   MCMC.interval = 1000,
+#   #   MCMLE.maxit = 1000,
+#   #   MCMLE.steplength = 1
+#   # ),
+#   ncores = eff_cores
+# )
+# plot(dx, plots.joined = FALSE, qnts.alpha = 0.8)
+```
+
+## Simulações epidemiológicas
+
+* $t_{max} = 170$ dias
+* 30 simulações por cenário
+* No $t = 0$, 20 indivíduos expostos e 10 infectados,
+* 5 vagas no estado de hospitalização
+* Probabilidade de transição $H \rightarrow F$ é 1.5x maior em caso de 
+superlotação de hospitais
+
+```{r}
+# Number of steps
+nsteps <- 170
+# Number of simulations
+nsims <- 30
+# Initial conditions
+init <- init.net(e.num = 20, i.num = 10)
+```
+
+---
+
+### Cenário A
+
+```{r tab-inf-pars}
+# Possible infections in the SEIQHRF model
+inf.pars <- data.frame(
+  from = c("e", "i", "q"),
+  to = c("s", "s", "s"),
+  act.rate = c(10, 10, 2.5),
+  inf.prob = c(0.02, 0.05, 0.02) 
+)
+inf.pars$final.prob <- 1 - (1 - inf.pars$inf.prob)^inf.pars$act.rate
+
+inf.tab <- inf.pars
+inf.tab$from <- toupper(inf.tab$from)
+inf.tab$to <- toupper(inf.tab$to)
+inf.tab$final.prob <- round(inf.tab$final.prob, 2)
+names(inf.tab) <- c(
+  "De", "Para", "Encontros/dia",
+  "P(Infecção)", "P(Encontro e infecção)"
+)
+kbl(
+  inf.tab,
+  caption = "Parâmetros de infecção do Cenário A.",
+  booktabs = FALSE
+)
+```
+
+---
+
+```{r tab-prog-pars}
+# Progression parameters
+prog.pars <- data.frame(
+  from = c('e', 'e', 'i', 'i', 'i', 'q', 'q', 'h', 'h'),
+  to =   c('i', 'r', 'q', 'h', 'r', 'h', 'r', 'r', 'f'),
+  rate = c(1/10, 1/20, 1/30, 1/30, 1/20, 1/30, 1/20, 1/15, 1/50)
+)
+
+prog.tab <- prog.pars
+prog.tab$from <- toupper(prog.tab$from)
+prog.tab$to <- toupper(prog.tab$to)
+prog.tab$rate <- round(prog.tab$rate, 2)
+names(prog.tab) <- c("De", "Para", "Transições/dia")
+kbl(
+  prog.tab,
+  caption = "Parâmetros de progressão do Cenário A.",
+  booktabs = FALSE
+)
+```
+
+---
+
+```{r}
+source("R/module-fx.R")
+
+# Summary parameters
+states <- c(inf.pars$from, inf.pars$to, prog.pars$from, prog.pars$to)
+unique.states <- unique(states)
+sum.pars <- with(
+  prog.pars,
+  list(
+    num.names = paste(unique.states, "num", sep = "."),
+    flow.names = paste0(from, to, ".flow"),
+    prog.rates = tapply(rate, from, function(x) 1 - prod(1 - x)),
+    next.states = tapply(to, from, list),
+    next.probs = tapply(rate, from, function(x) list(x / sum(x))),
+    infective.status = unique(inf.pars$from),
+    infected.status = unique(from)
+  )   
+)
+# Param list
+param <- param.net(
+  prog.pars = prog.pars,
+  inf.pars = inf.pars,
+  sum.pars = sum.pars
+)
+# Control settings
+control <- control.net(
+  type = NULL,
+  nsteps = nsteps,
+  nsims = nsims,
+  ncores = 1, 
+  infection.FUN = infect,
+  progress.FUN = progress,
+  verbose = FALSE
+)
+# Run the network model simulation with netsim
+sim_path <- "models/epi-sim-A.rds"
+if (file.exists(sim_path)) {
+  sim_A <- readRDS(sim_path)
+} else {
+  sim_A <- netsim(magnolia, param, init, control)
+  saveRDS(sim_A, sim_path)
+}
+```
+
+```{r plot-network-steps, fig.cap = "Rede ao longo de uma das simulações do Cenário A. O número acima da rede é o número de dias percorridos, e as cores indicam vértices suscetíveis (azul), em estados de infecção (vermelho) e recuperados (verde)."}
+set.seed(1995)
+par(mar = rep(0.1, 4), mfrow = c(2, 2))
+ats <- c(1, 25, 50, 100)
+invisible(lapply(
+  ats, 
+  function(at) plot(
+    sim_A, 
+    type = "network", 
+    at = at, 
+    col.status = T,
+    main = at,
+    vertex.cex = 1.5
+  )
+))
+```
+
+---
+
+```{r plot-sim-A, fig.cap = "Prevalência ao longo do tempo no Cenário A. Linhas são prevalências médias, e áreas são intervalos de prevalência."}
+plot(
+  sim_A, 
+  popfrac = TRUE,
+  xlab = "Tempo",
+  ylab = "Prevalência Média",
+  targ.col = COLORS
+)
+```
+
+---
+
+Podemos ver a distribuição por turma...
+
+---
+
+### Cenário B
+
+* Reduzimos as taxas de encontro em 70%, simulando isolamento social
+
+```{r tab-inf-pars-b}
+inf.pars$act.rate <- inf.pars$act.rate * 0.3
+inf.pars$final.prob <- 1 - (1 - inf.pars$inf.prob)^inf.pars$act.rate
+
+inf.tab <- inf.pars
+inf.tab$from <- toupper(inf.tab$from)
+inf.tab$to <- toupper(inf.tab$to)
+inf.tab$final.prob <- round(inf.tab$final.prob, 2)
+names(inf.tab) <- c(
+  "De", "Para", "Encontros/dia",
+  "P(Infecção)", "P(Encontro e infecção)"
+)
+kbl(
+  inf.tab,
+  caption = "Parâmetros de infecção do Cenário B.",
+  booktabs = FALSE
+)
+```
+
+---
+
+```{r}
+param$inf.pars <- inf.pars
+# Run the network model simulation with netsim
+sim_path <- "models/epi-sim-B.rds"
+if (file.exists(sim_path)) {
+  sim_B <- readRDS(sim_path)
+} else {
+  sim_B <- netsim(magnolia, param, init, control)
+  saveRDS(sim_B, sim_path)
+}
+```
+
+```{r plot-sim-B, fig.cap = "Prevalência ao longo do tempo no Cenário A. Linhas são prevalências médias, e áreas são intervalos de prevalência."}
+plot(
+  sim_B, 
+  popfrac = TRUE,
+  xlab = "Tempo",
+  ylab = "Prevalência Média",
+  targ.col = COLORS
+)
+```
+
+# Considerações 
+
+* A implementação foi bem sucedida
+* O modelo está no Github para qualquer pesquisador ou pesquisadora utilizar
+
+# Trabalhos futuros 
+
+* Simular o $SEIQHRF$ em redes no contexto da rede do Aglomerado da Serra
+
+# Obrigado!
+
+# Referências
+
+* ANDERSSON, H.; BRITTON, T. Stochastic epidemic models and their statistical analysis, volume 151 of
+lecture notes in statistics. In:
+. [S.l.: s.n.], 2000. v. 151. Citado na página 27.
+* CARNEGIE, N. et al. An approximation method for improving dynamic network model fitting. Journal of
+Computational and Graphical Statistics, v. 24, p. 00–00, 05 2014. Citado na página 32.
+
+---
+
+* CHURCHES, T. Tim Churches Health Data Science Blog: Modelling the effects of public health interventions
+on COVID-19 transmission using R - part 2. 2020. Disponível em: <https://timchurches.github.io/blog/posts
+/2020-03-18-modelling-the-effects-of-public-health-interventions-on-covid-19-transmission-part-2/>. Citado
+3 vezes nas páginas 23, 26 e 43.
+* EXPONENTIAL Random Graph Models for Social Networks: Theory, Methods, and Applications. [S.l.]:
+Cambridge University Press, 2012. (Structural Analysis in the Social Sciences). Citado na página 28.
+
+---
+
+* GEYER, C. J.; THOMPSON, E. A. Constrained monte carlo maximum likelihood for dependent data.
+Journal of the Royal Statistical Society. Series B (Methodological), [Royal Statistical Society, Wiley], v. 54,
+n. 3, p. 657–699, 1992. ISSN 00359246. Disponível em: <http://www.jstor.org/stable/2345852>. Citado na
+página 29.
+* GIORDANO, G. et al. Modelling the covid-19 epidemic and implementation of population-wide interventions
+in italy. Nature Medicine, Springer Science and Business Media LLC, v. 26, n. 6, p. 855–860, Apr 2020. ISSN
+1546-170X. Disponível em: <http://dx.doi.org/10.1038/s41591-020-0883-7>. Citado na página 25.
+
+---
+
+* HANDCOCK, M. S. et al. ergm: Fit, Simulate and Diagnose Exponential-Family Models for Networks. [S.l.],
+2020. R package version 3.11.0. Disponível em: <https://CRAN.R-project.org/package=ergm>. Citado 2
+vezes nas páginas 31 e 39.
+* HUNTER, D.; HANDCOCK, M. Inference in curved exponential family models for networks. Journal of
+Computational and Graphical Statistics, American Statistical Association, v. 15, n. 3, p. 565–583, set. 2006.
+ISSN 1061-8600. Funding Information: The authors are grateful to Steven Goodreau and Tom Snijders for
+very helpful comments and discussions. This research is supported by Grant DA012831 from NIDA and Grant
+HD041877 from NICHD. Citado 2 vezes nas páginas 28 e 29.
+
+---
+
+* JENNESS, S. M.; GOODREAU, S. M.; MORRIS, M. Epimodel: An r package for mathematical modeling of
+infectious disease over networks. Journal of Statistical Software, Articles, v. 84, n. 8, p. 1–47, 2018. ISSN
+1548-7660. Disponível em: <https://www.jstatsoft.org/v084/i08>. Citado 2 vezes nas páginas 31 e 32.
+* KEELING, M. J.; EAMES, K. T. Networks and epidemic models. Journal of The Royal Society Interface, v. 2,
+n. 4, p. 295–307, 2005. Disponível em: <https://royalsocietypublishing.org/doi/abs/10.1098/rsif.2005.0051>.
+Citado 3 vezes nas páginas 25, 26 e 27.
+
+---
+
+* KENDALL, D. G. Deterministic and stochastic epidemics in closed populations. In:
+. Volume 4
+Contributions to Biology and Problems of Health. University of California Press, 1956. p. 149–166. Disponível
+em: <https://doi.org/10.1525/9780520350717-011>. Citado na página 23.
+* KRIVITSKY, P. N.; HANDCOCK, M. S. A separable model for dynamic networks. Journal of the Royal
+Statistical Society: Series B (Statistical Methodology), Wiley, v. 76, n. 1, p. 29–46, Mar 2013. ISSN 1369-7412.
+Disponível em: <http://dx.doi.org/10.1111/rssb.12014>. Citado na página 28.
+
+---
+
+* R Core Team. R: A Language and Environment for Statistical Computing. Vienna, Austria, 2021. Disponível
+em: <https://www.R-project.org/>. Citado na página 31.
+* RESNICK, M. et al. Protecting adolescents from harmfindings from the national longitudinal study on
+adolescent health. JAMA : the journal of the American Medical Association, v. 278, p. 823–32, 09 1997.
+Citado na página 39.

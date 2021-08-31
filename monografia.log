@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.25)  26 AUG 2021 22:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.25)  30 AUG 2021 18:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -750,19 +750,67 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_shortintertext_sep=\dimen266
 ) (/usr/share/texlive/texmf-dist/tex/latex/esdiff/esdiff.sty
 Package: esdiff 
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2017/07/18 v5.2 algorithms environments
+\c@AlgoLine=\count345
+\algocf@hangindent=\skip269
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count346
+LaTeX Info: Redefining \checkoddpage on input line 45.
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+) (/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+\skiptotal=\skip270
+\skiplinenumber=\skip271
+\skiprule=\skip272
+\skiphlne=\skip273
+\skiptext=\skip274
+\skiplength=\skip275
+\algomargin=\skip276
+\skipalgocfslide=\skip277
+\algowidth=\dimen267
+\inoutsize=\dimen268
+\inoutindent=\dimen269
+\interspacetitleruled=\dimen270
+\interspacealgoruled=\dimen271
+\interspacetitleboxruled=\dimen272
+\algocf@ruledwidth=\skip278
+\algocf@inoutbox=\box59
+\algocf@inputbox=\box60
+\AlCapSkip=\skip279
+\AlCapHSkip=\skip280
+\algoskipindent=\skip281
+\algocf@nlbox=\box61
+\algocf@hangingbox=\box62
+\algocf@untilbox=\box63
+\algocf@skipuntil=\skip282
+\algocf@capbox=\box64
+\algocf@lcaptionbox=\skip283
+\algoheightruledefault=\skip284
+\algoheightrule=\skip285
+\algotitleheightruledefault=\skip286
+\algotitleheightrule=\skip287
+\c@algocfline=\count347
+\c@algocfproc=\count348
+\c@algocf=\count349
+\algocf@algoframe=\box65
+\algocf@algobox=\box66
 ) (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty (/usr/share/texliv
 e/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2020-02-14 L3 programming layer (loader) 
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count345
-\l__pdf_internal_box=\box59
+\l__kernel_color_stack_int=\count350
+\l__pdf_internal_box=\box67
 )) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2020-02-14 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count346
-\g__xparse_grabber_int=\count347
-\l__xparse_m_args_int=\count348
-\l__xparse_v_nesting_int=\count349
+\l__xparse_current_arg_int=\count351
+\g__xparse_grabber_int=\count352
+\l__xparse_m_args_int=\count353
+\l__xparse_v_nesting_int=\count354
 )
 Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
 (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
@@ -772,142 +820,51 @@ Package: backref 2020/01/14 v1.40 Bibliographical back referencing
 ) (./abntex2cite.sty
 Package: abntex2cite 2018/11/24 v-1.9.7 abnTeX2
 (./abntex2abrev.sty)
-\minimumbiblabelwidth=\skip269
-\ABCIauxlen=\skip270
-\c@ABCIaux=\count350
-\c@ABCImax=\count351
+\minimumbiblabelwidth=\skip288
+\ABCIauxlen=\skip289
+\c@ABCIaux=\count355
+\c@ABCImax=\count356
 (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
-) (/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
-Package: relsize 2013/03/29 ver 4.1
 )
-\biblabelsep=\skip271
+\biblabelsep=\skip290
 LaTeX Info: Redefining \newblock on input line 591.
 LaTeX Info: Redefining \cite on input line 618.
 \ABCItoken=\toks33
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 247.
-\c@quadro=\count352
-\c@loqdepth=\count353
-\cftbeforequadroskip=\skip272
-\cftquadroindent=\skip273
-\cftquadronumwidth=\skip274
+Package hyperref Info: Option `colorlinks' set `true' on input line 248.
+\c@quadro=\count357
+\c@loqdepth=\count358
+\cftbeforequadroskip=\skip291
+\cftquadroindent=\skip292
+\cftquadronumwidth=\skip293
 \monografia@idxfile=\write5
 \openout5 = `monografia.idx'.
 
 Writing index file monografia.idx 
-(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip275
-\multirow@cntb=\count354
-\multirow@dima=\skip276
-\bigstrutjot=\dimen267
-) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen268
-\WF@size=\dimen269
-\c@WF@wrappedlines=\count355
-\WF@box=\box60
-\WF@everypar=\toks34
-Package: wrapfig 2003/01/31  v 3.6
-) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count356
-\float@exts=\toks35
-\float@box=\box61
-\@float@everytoks=\toks36
-\@floatcapt=\box62
-) (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
-Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
-\everycr=\toks37
-\minrowclearance=\skip277
-) (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
-Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
-Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
-)
-Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-) (/usr/share/texlive/texmf-dist/tex/latex/tabu/tabu.sty
-Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed) + inter
-mediate FMi
-(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
-Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box63
-\sift@deathcycles=\count357
-\@vwid@loff=\dimen270
-\@vwid@roff=\dimen271
-)
-\c@taburow=\count358
-\tabu@nbcols=\count359
-\tabu@cnt=\count360
-\tabu@Xcol=\count361
-\tabu@alloc=\count362
-\tabu@nested=\count363
-\tabu@target=\dimen272
-\tabu@spreadtarget=\dimen273
-\tabu@naturalX=\dimen274
-\tabucolX=\dimen275
-\tabu@Xsum=\dimen276
-\extrarowdepth=\dimen277
-\abovetabulinesep=\dimen278
-\belowtabulinesep=\dimen279
-\tabustrutrule=\dimen280
-\tabu@thebody=\toks38
-\tabu@footnotes=\toks39
-\tabu@box=\box64
-\tabu@arstrutbox=\box65
-\tabu@hleads=\box66
-\tabu@vleads=\box67
-\tabu@cellskip=\skip278
-) (/usr/share/texlive/texmf-dist/tex/latex/threeparttable/threeparttable.sty
-Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box68
-) (/usr/share/texlive/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
-Package: threeparttablex 2013/07/23 v0.3 by daleif
-(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
-Package: environ 2014/05/04 v0.3 A new way to define environments
-(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
-Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
-))
-\TPTL@width=\skip279
-) (/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box69
-\UL@hyphenbox=\box70
-\UL@skip=\skip280
-\UL@hook=\toks40
-\UL@height=\dimen281
-\UL@pe=\count364
-\UL@pixel=\dimen282
-\ULC@box=\box71
-Package: ulem 2019/11/18
-\ULdepth=\dimen283
-) (/usr/share/texlive/texmf-dist/tex/latex/makecell/makecell.sty
-Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen284
-\c@nlinenum=\count365
-\TeXr@lab=\toks41
-) (./monografia.aux)
+(./monografia.aux)
 \openout1 = `monografia.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 315.
-LaTeX Font Info:    ... okay on input line 315.
-\AtBeginShipoutBox=\box72
-Package hyperref Info: Link coloring ON on input line 315.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 302.
+LaTeX Font Info:    ... okay on input line 302.
+\AtBeginShipoutBox=\box68
+Package hyperref Info: Link coloring ON on input line 302.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -915,24 +872,24 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count366
+\c@section@level=\count359
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 315.
-LaTeX Info: Redefining \ref on input line 315.
-LaTeX Info: Redefining \pageref on input line 315.
-LaTeX Info: Redefining \nameref on input line 315.
-\myptabbox=\box73
-\myptabboxwidth=\skip281
-LaTeX Info: Redefining \microtypecontext on input line 315.
+LaTeX Info: Redefining \nameref on input line 302.
+LaTeX Info: Redefining \ref on input line 302.
+LaTeX Info: Redefining \pageref on input line 302.
+LaTeX Info: Redefining \nameref on input line 302.
+\myptabbox=\box69
+\myptabboxwidth=\skip294
+LaTeX Info: Redefining \microtypecontext on input line 302.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 315.
+LaTeX Info: Redefining \showhyphens on input line 302.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -941,17 +898,17 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 ) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count367
-\scratchdimen=\dimen285
-\scratchbox=\box74
-\nofMPsegments=\count368
-\nofMParguments=\count369
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count370
-\MPscratchDim=\dimen286
-\MPnumerator=\count371
-\makeMPintoPDFobject=\count372
-\everyMPtoPDFconversion=\toks43
+\scratchcounter=\count360
+\scratchdimen=\dimen273
+\scratchbox=\box70
+\nofMPsegments=\count361
+\nofMParguments=\count362
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count363
+\MPscratchDim=\dimen274
+\MPnumerator=\count364
+\makeMPintoPDFobject=\count365
+\everyMPtoPDFconversion=\toks35
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -961,7 +918,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 3
-32.
+19.
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -975,39 +932,39 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-41.
+28.
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-41.
+28.
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-341.
+328.
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-341.
+328.
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 341.
+(Font)              <10> on input line 328.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 341.
+(Font)              <7> on input line 328.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 341.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 341
+(Font)              <5> on input line 328.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 328
 .
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 341
+LaTeX Font Info:    Trying to load font information for U+msb on input line 328
 .
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1017,39 +974,39 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.341 
+l.328 
        [1
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 385--385
+Underfull \hbox (badness 10000) in paragraph at lines 372--372
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--385
+Underfull \hbox (badness 10000) in paragraph at lines 372--372
 
  []
 
 
-Overfull \hbox (16.2819pt too wide) in paragraph at lines 385--385
+Overfull \hbox (16.2819pt too wide) in paragraph at lines 372--372
 []  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--385
+Underfull \hbox (badness 10000) in paragraph at lines 372--372
 
  []
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 385.
+(Font)              <8> on input line 372.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 385.
+(Font)              <6> on input line 372.
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.404 
+l.391 
        [2] [3
 
 ] [4
@@ -1075,312 +1032,289 @@ Package babel Info: Importing basic data for english
 
 ] (./monografia.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 40.
-) [19] [20
+(Font)              <10.95> on input line 51.
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] (./monografia.toc) [21] [22
+[19] [20] (./monografia.toc)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-]
+[21
 
-LaTeX Warning: Citation `sidarthe' on page 23 undefined on input line 598.
+] [22]
 
-[23] [24
+LaTeX Warning: Citation `sidarthe' on page 23 undefined on input line 583.
+
+[23
+
+] [24
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 6
-27.
+29.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-
-LaTeX Warning: Reference `fig:sir-plot' on page 25 undefined on input line 637.
-
-
-<monografia_files/figure-latex/plot-sir-1.pdf, id=240, 1003.75pt x 582.175pt>
+<monografia_files/figure-latex/plot-sir-1.pdf, id=293, 1003.75pt x 582.175pt>
 File: monografia_files/figure-latex/plot-sir-1.pdf Graphic file (type pdf)
 <use monografia_files/figure-latex/plot-sir-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-sir-1.pdf  used on 
-input line 641.
+input line 644.
+(pdftex.def)             Requested size: 316.24419pt x 183.42163pt.
+[25 <./monografia_files/figure-latex/plot-sir-1.pdf>]
+<monografia_files/figure-latex/seiqhrf-plot-1.pdf, id=317, 1003.75pt x 582.175p
+t>
+File: monografia_files/figure-latex/seiqhrf-plot-1.pdf Graphic file (type pdf)
+<use monografia_files/figure-latex/seiqhrf-plot-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/seiqhrf-plot-1.pdf  used
+ on input line 685.
 (pdftex.def)             Requested size: 316.24419pt x 183.42163pt.
 
-Underfull \vbox (badness 1199) has occurred while \output is active []
+LaTeX Warning: Citation `epi' on page 26 undefined on input line 695.
 
-[25pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
-}) has been already used, duplicate ignored
+[26 <./monografia_files/figure-latex/seiqhrf-plot-1.pdf>] [27] [28] [29] [30
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.662 \]
-         <./monografia_files/figure-latex/plot-sir-1.pdf>]
-
-LaTeX Warning: Citation `infectiousdisases' on page 26 undefined on input line 
-668.
-
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
-70.
+]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
+01.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<monografia_files/figure-latex/plot-compartment-1.pdf, id=265, 469.755pt x 325.
+
+LaTeX Warning: Citation `myself' on page 31 undefined on input line 908.
+
+[31]
+<monografia_files/figure-latex/plot-compartment-1.pdf, id=396, 469.755pt x 325.
 215pt>
 File: monografia_files/figure-latex/plot-compartment-1.pdf Graphic file (type p
 df)
 <use monografia_files/figure-latex/plot-compartment-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-compartment-1.pdf  
-used on input line 685.
+used on input line 974.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
+<monografia_files/figure-latex/plot-epi-diag-1.pdf, id=398, 1003.75pt x 582.175
+pt>
+File: monografia_files/figure-latex/plot-epi-diag-1.pdf Graphic file (type pdf)
 
-LaTeX Warning: Citation `missing' on page 26 undefined on input line 703.
+<use monografia_files/figure-latex/plot-epi-diag-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-epi-diag-1.pdf  use
+d on input line 995.
+(pdftex.def)             Requested size: 472.00763pt x 273.76442pt.
+[32 <./monografia_files/figure-latex/plot-compartment-1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[26pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
-}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.707 \section
-              {SEIQHRF} <./monografia_files/figure-latex/plot-compartment-1.pdf
->]
-<monografia_files/figure-latex/seiqhrf-plot-1.pdf, id=292, 1003.75pt x 582.175p
-t>
-File: monografia_files/figure-latex/seiqhrf-plot-1.pdf Graphic file (type pdf)
-<use monografia_files/figure-latex/seiqhrf-plot-1.pdf>
-Package pdftex.def Info: monografia_files/figure-latex/seiqhrf-plot-1.pdf  used
- on input line 730.
-(pdftex.def)             Requested size: 316.24419pt x 183.42163pt.
-[27pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
-}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.763 \chapter
-              {ImplementaÃ§Ã£o} <./monografia_files/figure-latex/seiqhrf-plot-1
-.pdf>] [28
-
-]
-
-LaTeX Warning: Citation `epimodel-gallery' on page 29 undefined on input line 7
-78.
-
+[33 <./monografia_files/figure-latex/plot-epi-diag-1.pdf>]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 795.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1059.
 
 LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 797.
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 1061.
 
 
-Overfull \vbox (0.237pt too high) detected at line 863
- []
-
-[29]
-Underfull \vbox (badness 10000) detected at line 863
+[34]
+Underfull \vbox (badness 10000) detected at line 1127
  []
 
 
-Underfull \vbox (badness 10000) detected at line 863
+Underfull \vbox (badness 10000) detected at line 1127
  []
 
-[30] [31] [32]
-<monografia_files/figure-latex/plot-magnolia-1.pdf, id=348, 469.755pt x 325.215
+[35] [36] [37] [38
+
+]
+Underfull \hbox (badness 2680) in paragraph at lines 1212--1214
+[]\T1/lmr/m/n/10 (+20) A do-cu-men-ta-ção do \T1/lmtt/m/n/10 ergm \T1/lmr/m/n/1
+0 (+20) con-tém de-ta-lhes so-bre o mo-delo uti-li-zado na si-mu-la-ção do
+ []
+
+<monografia_files/figure-latex/plot-magnolia-1.pdf, id=480, 469.755pt x 325.215
 pt>
 File: monografia_files/figure-latex/plot-magnolia-1.pdf Graphic file (type pdf)
 
 <use monografia_files/figure-latex/plot-magnolia-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-magnolia-1.pdf  use
-d on input line 947.
+d on input line 1237.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-<monografia_files/figure-latex/plot-attr-distr-1.pdf, id=350, 469.755pt x 325.2
+<monografia_files/figure-latex/plot-attr-distr-1.pdf, id=482, 469.755pt x 325.2
 15pt>
 File: monografia_files/figure-latex/plot-attr-distr-1.pdf Graphic file (type pd
 f)
 <use monografia_files/figure-latex/plot-attr-distr-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-attr-distr-1.pdf  u
-sed on input line 959.
+sed on input line 1249.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
 
-Underfull \hbox (badness 2680) in paragraph at lines 966--968
-[]\T1/lmr/m/n/10 (+20) A do-cu-men-ta-ção do \T1/lmtt/m/n/10 ergm \T1/lmr/m/n/1
-0 (+20) con-tém de-ta-lhes so-bre o mo-delo uti-li-zado na si-mu-la-ção do
+Overfull \vbox (0.92107pt too high) detected at line 1272
  []
 
-[33
-
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.982 \end{quote}
-                  <./monografia_files/figure-latex/plot-magnolia-1.pdf>] [34pdf
-TeX warning (ext4): destination with the same identifier (name{figure.4.5}) has
- been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1065 
-        <./monografia_files/figure-latex/plot-attr-distr-1.pdf>]
-<monografia_files/figure-latex/plot-magnolia-sim-1.pdf, id=375, 469.755pt x 325
+[39] [40 <./monografia_files/figure-latex/plot-magnolia-1.pdf> <./monografia_fi
+les/figure-latex/plot-attr-distr-1.pdf>]
+<monografia_files/figure-latex/plot-magnolia-sim-1.pdf, id=503, 469.755pt x 325
 .215pt>
 File: monografia_files/figure-latex/plot-magnolia-sim-1.pdf Graphic file (type 
 pdf)
 <use monografia_files/figure-latex/plot-magnolia-sim-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-magnolia-sim-1.pdf 
- used on input line 1068.
+ used on input line 1315.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
 
-Underfull \vbox (badness 1259) has occurred while \output is active []
+LaTeX Warning: Reference `fig:plot-degree-comp' on page 41 undefined on input l
+ine 1322.
 
-[35pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}
-) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1079 ## [1] 1.333333
-                      pdfTeX warning (ext4): destination with the same identifi
-er (name{figure.4.6}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1079 ## [1] 1.333333
-                       <./monografia_files/figure-latex/plot-magnolia-sim-1.pdf
->]
-<monografia_files/figure-latex/plot-degree-comp-1.pdf, id=385, 469.755pt x 325.
+<monografia_files/figure-latex/plot-degree-comp-1.pdf, id=504, 469.755pt x 325.
 215pt>
 File: monografia_files/figure-latex/plot-degree-comp-1.pdf Graphic file (type p
 df)
 <use monografia_files/figure-latex/plot-degree-comp-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-degree-comp-1.pdf  
-used on input line 1084.
+used on input line 1327.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-
-LaTeX Warning: Reference `fig:tab-inf-pars' on page 36 undefined on input line 
-1103.
-
-<monografia_files/figure-latex/unnamed-chunk-10-1.pdf, id=388, 469.755pt x 325.
+[41 <./monografia_files/figure-latex/plot-magnolia-sim-1.pdf>]
+<monografia_files/figure-latex/plot-degree-comp-2.pdf, id=513, 469.755pt x 325.
 215pt>
-File: monografia_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type p
+File: monografia_files/figure-latex/plot-degree-comp-2.pdf Graphic file (type p
 df)
-<use monografia_files/figure-latex/unnamed-chunk-10-1.pdf>
-Package pdftex.def Info: monografia_files/figure-latex/unnamed-chunk-10-1.pdf  
-used on input line 1128.
+<use monografia_files/figure-latex/plot-degree-comp-2.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-degree-comp-2.pdf  
+used on input line 1340.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-[36pdfTeX warning (ext4): destination with the same identifier (name{table.4.2}
-) has been already used, duplicate ignored
+[42 <./monografia_files/figure-latex/plot-degree-comp-1.pdf> <./monografia_file
+s/figure-latex/plot-degree-comp-2.pdf>]
+<monografia_files/figure-latex/plot-network-steps-1.pdf, id=535, 469.755pt x 32
+5.215pt>
+File: monografia_files/figure-latex/plot-network-steps-1.pdf Graphic file (type
+ pdf)
+<use monografia_files/figure-latex/plot-network-steps-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-network-steps-1.pdf
+  used on input line 1433.
+(pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
+<monografia_files/figure-latex/plot-sim-A-1.pdf, id=536, 469.755pt x 325.215pt>
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1128 ...e-latex/unnamed-chunk-10-1} \end{center}
-                                                  pdfTeX warning (ext4): destin
-ation with the same identifier (name{figure.4.7}) has been already used, duplic
-ate ignored
+File: monografia_files/figure-latex/plot-sim-A-1.pdf Graphic file (type pdf)
+<use monografia_files/figure-latex/plot-sim-A-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-sim-A-1.pdf  used o
+n input line 1442.
+(pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
+[43] [44 <./monografia_files/figure-latex/plot-network-steps-1.pdf> <./monograf
+ia_files/figure-latex/plot-sim-A-1.pdf>]
+<monografia_files/figure-latex/plot-sim-B-1.pdf, id=566, 469.755pt x 325.215pt>
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1128 ...e-latex/unnamed-chunk-10-1} \end{center}
-                                                   <./monografia_files/figure-l
-atex/plot-degree-comp-1.pdf>] [37 <./monografia_files/figure-latex/unnamed-chun
-k-10-1.pdf>] [38
+File: monografia_files/figure-latex/plot-sim-B-1.pdf Graphic file (type pdf)
+<use monografia_files/figure-latex/plot-sim-B-1.pdf>
+Package pdftex.def Info: monografia_files/figure-latex/plot-sim-B-1.pdf  used o
+n input line 1485.
+(pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
+[45 <./monografia_files/figure-latex/plot-sim-B-1.pdf>] [46
 
 ] (./monografia.bbl (./monografia.brf)
 \tf@brf=\write6
 \openout6 = `monografia.brf'.
 
-[39] [40
+[47] [48
 
 ]
 bibitemlist
-) [41] [42
+) [49] [50
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1143.
+(hyperref)                removing `\uppercase' on input line 1500.
 
-[43
+[51
 
-] [44]
+] [52]
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-1243.
+1550.
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \vbox (badness 1360) detected at line 1582
+Underfull \vbox (badness 1360) detected at line 2010
  []
 
-[45
+[53
 
 ]
-Underfull \vbox (badness 10000) detected at line 1582
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1582
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
-[46]
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-[47]
-Underfull \vbox (badness 10000) detected at line 1582
+[54]
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1582
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
-[48]
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-[49]
-Underfull \vbox (badness 10000) detected at line 1582
+[55]
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1582
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
-[50]
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-[51]
-Underfull \vbox (badness 10000) detected at line 1582
+[56]
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1582
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
-[52]
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1582
- []
-
-[53]
-Underfull \vbox (badness 10000) detected at line 1582
+[57]
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1582
+Underfull \vbox (badness 10000) detected at line 2010
  []
 
-[54] [55]
+[58]
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+[59]
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+[60]
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+[61]
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+[62]
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2010
+ []
+
+[63] [64] [65]
 \tf@lof=\write7
 \openout7 = `monografia.lof'.
 
@@ -1390,46 +1324,51 @@ Underfull \vbox (badness 10000) detected at line 1582
 \tf@toc=\write9
 \openout9 = `monografia.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1585.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1585.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2031.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2031.
 (./monografia.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1585.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1585.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2031.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2031.
 
 Package rerunfilecheck Info: File `monografia.brf' has not changed.
-(rerunfilecheck)             Checksum: AA38277CBD5713FB5C4D4BD8F693E163;933.
+(rerunfilecheck)             Checksum: 314A2634FA62F8F896BB694C1B4F48DF;1228.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1585.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2031.
  ) 
 Here is how much of TeX's memory you used:
- 21498 strings out of 483090
- 323531 string characters out of 5963929
- 813577 words of memory out of 5000000
- 35879 multiletter control sequences out of 15000+600000
- 618781 words of font info for 138 fonts, out of 8000000 for 9000
+ 21240 strings out of 483090
+ 322736 string characters out of 5963929
+ 835903 words of memory out of 5000000
+ 35571 multiletter control sequences out of 15000+600000
+ 623990 words of font info for 162 fonts, out of 8000000 for 9000
  61 hyphenation exceptions out of 8191
- 42i,13n,42p,991b,547s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,18n,44p,991b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/d
-vips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
-e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
-m-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi7.p
-fb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/s
-hare/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/publi
-c/lm/lmri8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/t
-exmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy1
-0.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
-s/type1/public/lm/lmtko10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pf
-b></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb>
-Output written on monografia.pdf (57 pages, 1335770 bytes).
+vips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/shar
+e/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
+m-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}</usr/share/texmf/f
+onts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.p
+fb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/t
+ype1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi7.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/l
+mri8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.
+pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/fonts/t
+ype1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb>
+</usr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1
+/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/s
+hare/texmf/fonts/type1/public/lm/lmtko10.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on monografia.pdf (67 pages, 2863503 bytes).
 PDF statistics:
- 710 PDF objects out of 1000 (max. 8388607)
- 608 compressed objects within 7 object streams
- 121 named destinations out of 1000 (max. 500000)
- 24881 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 957 PDF objects out of 1000 (max. 8388607)
+ 826 compressed objects within 9 object streams
+ 166 named destinations out of 1000 (max. 500000)
+ 24989 words of extra memory for PDF output out of 29859 (max. 10000000)
 

@@ -26,35 +26,52 @@ USE_CACHE <- TRUE
 
 O avanço de epidemias em populações fechadas é um problema que pode ser 
 modelado como um processo Markoviano temporal com um número finito de estados, 
-também chamados de compartimentos \cite{kendall}. 
-As estimativas fornecidas por esses modelos sob o efeito de diferentes 
-intervenções informam a construção de políticas públicas eficientes no combate 
+também chamados de compartimentos \cite{kendall}. As estimativas fornecidas por
+esses modelos sob o efeito de diferentes intervenções informam a construção de
+políticas públicas eficientes no combate
 às doenças estudadas.
 
 No último ano, muitos modelos foram propostos para estimar a propagação e 
 os impactos da doença COVID-19, causada pelo vírus Sars-CoV-2. 
 Alguns conjuntos de estados foram criados com o propósito de estimar os efeitos 
-sociais e estruturais da pandemia \cite{sidarthe}.
-Um desses conjuntos é o SEIQHRF 
-(Susceptible-Exposed-Quarantined-Hospitalized-Recovered-Fatality) 
+sociais e estruturais da pandemia \cite{sidarthe}. Um desses conjuntos é o
+$SEIQHRF$ (Susceptible-Exposed-Quarantined-Hospitalized-Recovered-Fatality) 
 \cite{churches}.  
 
 Na UFMG, o projeto *COVID-19: proposta de um modelo epidemiológico que 
 incorpora estruturas sociais de contágio* tem mapeado o grafo de relações 
 pessoais do Aglomerado da Serra em Belo Horizonte, com o objetivo de modelar a 
 progressão da COVID-19 em contextos de aglomerações urbanas. Esse projeto 
-motivou a implementação de modelos de redes utilizando os estados SEIQHRF 
+motivou a implementação de modelos de redes utilizando os estados $SEIQHRF$ 
 nesta monografia.
+
+Para isso, implementamos os algoritmos necessários para as simulações numéricas.
+Além disso, também exemplificamos alguns casos de uso para as simulações, 
+utilizando dados de estrutura similar aos dados do Aglomerado da Serra. 
+Até a data de publicação deste trabalho, só existiam implementações do 
+SEIQHRF considerando populações de misturas homogêneas. Agora, com a nossa
+implementação, é possível fazer simulações do modelo em questão para pequenas 
+populações, considerando estruturas mais complexas de mistura.
+
+O conteúdo deste trabalho tem a seguinte ordem:  uma introdução aos conceitos
+básicos de modelos epidemiológicos e grafos aleatórios; detalhamentos sobre a
+implementação do SEIQHRF; ajuste e simulação de um ERGM (exponential random
+graph model) representando uma escola de ensino médio; exemplos de simulações e
+testes de hipóteses utilizando o SEIQHRF no grafo em questão.
 
 \chapter{Metodologia}
 
+...
+
+\section{Conjuntos de estados}
+
 Modelos epidemiológicos são baseados na compartimentalização de indivíduos 
 de uma população. \cite{keeling2005} 
-Normalmente, os compartimentos representam estados da doença.
-Esses modelos descrevem a proporção de indivíduos de uma população em cada 
-estado ao longo do tempo. 
+Normalmente, os compartimentos representam estados da doença, mas podem também 
+representar outras propriedades dos indivíduos, conforme discutimos nas 
+subseções a seguir.
 
-\section{SIR}
+\subsection{SIR}
 
 Um conjunto de compartimentos comumente utilizado para doenças infecciosas que 
 conferem imunidade vitalícia (caxumba, por exemplo) é o $SIR$.
@@ -67,7 +84,8 @@ se tornem infectados;
 recuperados;
 * **Recovered**: recuperado.
 
-A Figura \@ref(fig:sir-plot) ilustra a dinâmica entre os compartimentos $SIR$. 
+A Figura \@ref(fig:plot-sir) ilustra as dinâmicas de infecção e progressão entre 
+os compartimentos $SIR$. 
 
 ```{r plot-sir, fig.cap = "SIR. Linhas pontilhadas são infecções e linhas sólidas são progressões."}
 library(DiagrammeR)
@@ -103,13 +121,57 @@ edge_df <- create_edge_df(
 plot_states(states, edge_df)
 ```
 
-\section{Modelos determinísticos e estocásticos}
+\subsection{SEIQHRF}
+
+Alguns conjuntos de estados foram propostos para modelar as consequências 
+sociais e estruturais da pandemia do COVID-19. Por exemplo, o conjunto 
+$SIDARTHE$ \cite{giordano2020} (susceptible, infected, diagnosed, ailing, 
+recognized, threatened, healed, extinct) adiciona alguns estados para descrever 
+o estado de identificação e gravidade da doença nos indivíduos.
+
+O $SEIQHRF$ 
+(susceptible, exposed, infected, quarantined, hospitalized, fatality)
+\cite{churches}, modelo que implementamos neste trabalho, adiciona quatro
+estados ao SIR:
+
+* **Exposed**: infectado, assintomático;
+* **Quarantined**: infectado, sintomático, pratica isolamento social. Tem 
+uma taxa de encontros reduzida;
+* **Hospitalized**: infectado, sintomático, requer hospitalização. Tem uma taxa 
+de encontros reduzida e maior probabilidade de transição para fatalidade. Esse 
+estado tem um limite de vagas. Quando o limite é excedido, a probabilidade de 
+transição para fatalidade é multiplicada por uma constante;
+* **Fatality**: morte.
+
+A Figura \@ref(fig:seiqhrf-plot) ilustra as dinâmicas de infecção e progressão 
+do $SEIQHRF$.
+
+```{r seiqhrf-plot, fig.cap = "SEIQHRF. Linhas pontilhadas são infecções e linhas sólidas são progressões."} 
+states <- c("S", "E", "I", "Q", "H", "R", "F") 
+ids <- seq_along(states)
+names(ids) <- states
+from <- c('E', 'E', 'I', 'I', 'I', 'Q', 'Q', 'H', 'H', 'S', 'E', 'I', 'Q')
+to <- c('I', 'R', 'Q', 'H', 'R', 'H', 'R', 'R', 'F', 'E', 'S', 'S', 'S')
+edge_df <- create_edge_df(
+  from = ids[from], 
+  to = ids[to],
+  style = rep(c("solid", "dashed"), c(10, 3)),
+  color = "black"
+)
+plot_states(states, edge_df)
+```
+
+\section{Modelos epidemiológicos}
+
+Esses modelos descrevem a proporção de indivíduos de uma população em cada 
+estado ao longo do tempo... \cite{epi}
+
+\subsection{Determinístico}
 
 Sem dinâmicas vitais (processos naturais de nascimento e morte) e com uma 
 população com mistura homogênea (na qual os indivíduos têm probabilidades 
-idênticas de se encontrarem), 
-o $SIR$ pode ser expressado pelo seguinte conjunto de equações diferenciais 
-\cite{keeling2005}:
+idênticas de se encontrarem), o $SIR$ é definido pelo seguinte conjunto de
+equações diferenciais \cite{keeling2005}:
 
 $$
 \begin{aligned}
@@ -119,26 +181,267 @@ $$
 \end{aligned}
 $$
 
-Onde $\beta$ é a taxa de transmissão e $\gamma$ é a taxa de recuperação da 
+Onde $\beta$ é a taxa de transmissão, $\gamma$ é a taxa de recuperação da 
 doença, e $S + I + R = 1$.
-Esses modelos podem não possuem soluções analíticas exatas,
-e podem ser ajustados de forma determinística (aproximada) ou estocástica
-\cite{infectiousdisases}.
+... R_0
 
-O pacote `EpiModel` \cite{epimodel} da linguagem de programação 
-R \cite{epimodel} possui uma API para ajustar modelos epidemiológicos. 
-No `EpiModel`, modelos determinísticos são chamados de _Deterministic 
-Contact Models_ (DCMs), e modelos estocásticos são chamados de 
-_Invidual Contact Models_ (ICMs). 
+Dados os mesmos pressupostos, o $SEIQHRF$ é definido por um conjunto similar:
 
-Usando o `EpiModel`, fizemos o ajuste de dois modelos $SIR$.
-Um dos ajustes é DCM, e o outro ICM, com parâmetros idênticos.
-O tamanho da população é $N = 1000$, $beta = 0.16$ e $\gamma = 0.02$.
-No tempo 0, $S = 0.9$ e $I = 0.1$.
-A Figura \@ref(fig:plot-compartment) ilustra as progressões estimadas pelos 
-ajustes em questão.
+$$
+\begin{aligned}
+\frac{dN_S(t)}{dt} &= \nu N -\beta N_S(t)\frac{ (N_I(t)+N_E(t)+N_Q(t))}{N}-\mu N_S(t), \\ 
+\frac{dN_I(t)}{dt} &=\beta N_I(t)(N_S(t)+N_E(t))-\delta_1N_I(t)-\delta_2N_I(t)-\gamma N_I(t) -\mu N_I(t),\\
+\frac{dN_E(t)}{dt} &=\beta  N_E(t)(N_S(t)-N_I(t)) -\mu N_S(t),\\
+\frac{dN_Q(t)}{dt} &=\beta  N_Q(t)N_S(t)+\delta_1N_I(t)-\delta_2 N_Q(t)-\gamma N_Q(t)    -\mu N_Q(t),\\
+\frac{dN_H(t)}{dt} &=\delta_1N_I(t)+\delta_2 N_Q(t)-\gamma N_H(t)-\gamma N_H(t)-\mu_F N_H(t)   (-\mu N_H(t)),\\
+\frac{dN_R(t)}{dt} &=\gamma (N_I(t)+N_Q(t)+N_H(t))-\mu N_R(t),\\
+\frac{dN_F(t)}{dt} &=\mu_F N_H(t),\\
+\end{aligned}
+$$
+...
 
-```{r plot-compartment, fig.cap = "Comparação entre ajustes determinístico (DCM,  linhas sólidas) e estocástico (ICM, linhas tracejadas)."}
+\subsection{Estocástico}
+
+... \cite{stochasticepidemic}
+
+\subsection{Em redes}
+
+Quando o pressuposto de mistura homogênea não é razoável, modelos
+determinísticos e estocásticos podem ser adaptados, redefinindo os parâmetros do
+modelo como vetores, representando o comportamento de subpopulações. Contudo,
+para expressar estruturas sociais mais complexas, podemos utilizar modelos em 
+redes \cite{keeling2005}. 
+
+Seja o grafo $Y = (E, V), Y \in \mathcal{Y}$, no qual os vértices $V$
+representam indivíduos e as arestas $E$ representam as relações entre os
+indivíduos. Seja o processo $X_i^t = 0,1,2$, com $i\in V$, onde $0$ representa o
+indivíduo suscetível, $1$ infectado e $2$ recuperado. O processo $X_i(t)$
+obedece:
+ 
+$$
+\forall i \in V(g), \quad \mathbb{P}(X_i(t + \delta t) = x_i'| X_i(t) = x_i)= 
+\begin{cases} \beta M_i(x)\delta t &\mbox{se } x_i = 0 \textrm{ e } x_i' = 1 \\
+\gamma  \delta t & \mbox{se } x_i = 1 \textrm{ e } x_i' = 2 \\
+ 1-[\beta M_i(x) + \gamma ]\delta t & \text{c.c,}
+\end{cases}
+$$
+
+onde $M_i(x)$ é o número de vizinhos infectados do vértice $i$. Finalmente
+$N_S(t), N_I(t)$ e $N_R(t)$ são as somas dos vértices com valores 0, 1 ou 2.
+
+\section{Grafos aleatórios}
+
+Um modelo aleatório para grafos é definido pela coleção
+
+$$\{\Pr_{\theta}(Y), Y \in \mathcal{Y}_n, \theta \in \Theta  \},$$
+
+Onde $\mathcal{Y}_n=\{Y = (E, V), |V| = n, Y \textrm{ simples}\}$ é uma coleção
+de grafos simples de ordem $n$ que é chamada de espaço amostral, e 
+
+$$\forall \theta \in \Theta, \quad \mathbb{P}_{\theta}: \mathcal{Y}_n \rightarrow [0,1]$$
+
+é uma distribuição de probabilidades em $\mathcal{Y}_n$. 
+
+\subsection{Exponential random graph models}
+
+Seja $g : \mathcal{Y} \rightarrow \mathbb{R}^p$ o mapa de um grafo às suas 
+estatísticas suficientes, $\theta \in \mathbb{R}^q$ um vetor de $q$ parâmetros 
+do modelo, e  $\eta(\theta) : \mathbb{R}^q \rightarrow \mathbb{R}^p$ um mapa 
+de $\theta$ a parâmetros naturais $\theta \in \mathbb{R^p}$. O modelo
+exponencial para grafos aleatórios é definido como \cite{hunter-handcock-2006}:
+
+$$
+\Pr_{\eta,g}(Y=y \vert \theta) = 
+\frac{
+    \exp(\eta(\theta) \cdot g(y))
+}{
+    c_{\eta,g}(\theta)
+}, \quad
+y \in \mathcal{Y}
+$$
+
+No caso mais comum, tratado neste trabalho, $\eta(\theta) = \theta$.
+As estatísticas suficientes $g(y)$ podem ser funções da rede,
+ou de características dos vértices. 
+Por exemplo, o número de arestas é uma estatística função da rede,
+enquanto o número de vértices compartilhando um mesmo atributo é 
+uma função dos vértices.
+
+Na literatura em inglês, essa classe de modelos é chamada de _exponential 
+random graph models_ (ERGM). Ao longo deste trabalho, vamos nos referir à classe
+como ERGM. Detalhes sobre estimação de parâmetros foram discutidos na próxima
+subseção, que contém uma extensão do ERGM.
+
+A flexibilidade do ERGM faz com que essa classe de modelos tenha inúmeras 
+aplicações. ERGMs são comumente utilizados na modelagem de redes sociais 
+\cite{ergmsn}. Nesse contexto, os vértices são indivíduos e as arestas são
+relacionamentos entre os indivíduos. Relacionamentos podem significar uma de
+várias coisas: amizades, interações, compartilhamentos em plataformas online de
+redes sociais, etc.
+
+\subsection{Temporal ERGM}
+
+Redes dinâmicas - que evoluem ao longo do tempo - têm inúmeras aplicações.
+A classe de modelos _Temporal ERGM_ (TERGM) é uma extensão da ERGM, 
+que permite a modelagem da evolução de uma rede social por meio da dissolução 
+e formação de arestas ao longo do tempo discreto \cite{Krivitsky-2013}.
+
+Seja $g : \mathcal{Y}^2 \rightarrow \mathbb{R}^p$ a função que mapeia dois 
+grafos a suas estatísticas suficientes para a transição entre as redes 
+$y^{t-1}$ no tempo $t-1$ e $y^t$ no tempo $t$.
+A probabilidade de transição entre $y^{t-1}$ e $y^t$ é definida como:
+
+$$
+\Pr_{\eta,g}(Y^t = y^t \vert Y^{t-1} = y^{t-1};\theta) = 
+\frac{
+    \exp(\eta(\theta) \cdot g(y^t, y^{t-1}))
+}{
+    c_{\eta,g}(\theta, y^{t-1})
+}, \quad
+y^t, y^{t-1} \in \mathcal{Y}
+$$
+
+Generalizando para uma cadeia de ordem $k$, 
+seja $g : \mathcal{Y}^{k+1} \rightarrow \mathbb{R}^p$, 
+
+$$
+\Pr_{\eta,g}(Y^t = y^t \vert Y^{t-1} = y^{t-1}; \dots; Y^{t-k} = y^{t-k}; \theta) = 
+\frac{
+    \exp(\eta(\theta) \cdot g(y^{t-1}, \dots, y^{t-k}))
+}{
+    c_{\eta,g}(\theta, y^{t-1}, \dots, y^{t-k})
+}, \quad
+y^t, y^{t-1}, \dots, y^{t-k} \in \mathcal{Y},
+$$
+
+onde 
+
+$$
+c_{\eta,g}(\theta, y^{t-1}, \dots, y^{t-k}) =
+\sum_{y' \in \mathcal{Y}} \exp(\eta(\theta) \cdot g(\theta, y', y^{t-1}, \dots, y^{t-k})).
+$$
+
+TERGMs são uma extensão natural de ERGMs. TERGMs são basicamente ERGMs 
+que evoluem ao longo do tempo. Sem perda de generalidade, 
+contanto que a ordem $k$ seja finita, a máxima log-verossimilhaça condicional 
+desse modelo pode ser obtida por meio da maximização de
+
+$$
+l(\theta) = 
+\eta(\theta) \cdot 
+\big(\sum_{t=1}^T g(y^t, y^{t-1}) \big) -
+\log\big(\prod_{t=1}^T c_{\eta,g}(\theta, y^{t-1})\big)
+$$
+
+A maximização dessa função envolve o uso de um algoritmo computacional do tipo
+_Markov Chain Monte Carlo Maximum Likelihood Estimate_ (MCMCMLE) \cite{geyer92}.
+
+Por fim, descrevemos brevemente como gerar uma cadeia de Markov cuja 
+distribuição estacionária é 
+$\Pr_{\eta,g}(Y^t = y^t \vert Y^{t-1} = y^{t-1}; \dots; Y^{t-k} = y^{t-k}; \theta)$. 
+Uma cadeia simples que tem essa característica é construída da seguinte forma: 
+a cada passo da cadeia, selecionamos (estocástica ou deterministicamente) uma 
+aresta $(i, j)$, e então decidimos se $Y_{ij} = 0$ ou $Y_{ij} = 1$.
+Um jeito de fazer isso é utilizando Gibbs sampling, onde o novo valor de 
+$Y_{ij}$ é amostrado da distribuição de $Y_{ij} \vert Y_{ij}^C = y_{ij}^C$, 
+onde $Y_{ij}^C$ é o resto do grafo. Daí, $Y_{ij} \vert Y_{ij}^C = y_{ij}^C$ 
+tem uma distribuição de Bernoulli, com chances dadas por:
+
+$$
+\frac{
+\Pr(Y_{ij} = 1 \vert Y_{ij}^C = y_{ij}^C)
+}{
+\Pr(Y_{ij} = 0 \vert Y_{ij}^C = y_{ij}^C)
+} =
+\exp(\eta(\theta) \Delta g(y)_{ij}),
+$$
+
+onde $\Delta g(y)_{ij} = (g(y) \vert y_{ij} = 1) - (g(y) \vert y_{ij} = 0)$.
+Implementações de variações dessa ideia costumam ser feitas por meio de 
+algoritmos de Metropolis-Hastings \cite{hunter-handcock-2006}.
+
+\subsection{Separable TERGMs}
+
+...
+
+\chapter{Implementação}
+
+Os objetivos principais deste trabalho foram implementar e demonstrar o modelo 
+epidemiológico $SEIQHRF$ em redes. Nesta seção, detalhamos as partes mais
+importantes da implementação, incluindo bibliotecas, funções e algoritmos
+utilizados ou desenvolvidos. As três ferramentas principais desta seção são a
+linguagem de programação R \cite{r}; o pacote `ergm` \cite{ergm} para o ajuste
+via MCMC dos ERGMs e suas respectivas simulações; e o pacote `EpiModel` 
+\cite{epimodel} para as simulações dos modelos epidemiológicos em redes.
+
+A implementação do $SEIQHRF$ no `EpiModel` envolveu a programação de algumas 
+funções customizadas, descrevendo o processo de simulação do modelo em redes. 
+Essas funções e todo o código para reproduzir esta monografia estão disponíveis 
+no apêndice A deste trabalho, e também no Github. \cite{myself}
+
+\section{ergm}
+
+O pacote `ergm` foi utilizado para ajustar um ERGM. Para os fins deste trabalho,
+o uso deste pacote foi trivial, então não detalharemos os algoritmos a fundo.
+Aqui, apenas destacaremos as funções que utilizamos, junto à documentação 
+relevante dessas funções. As subseções a seguir são apresentadas no formato:
+
+`função(parâmetros)`
+
+Descrição da função.
+
+\subsection{Ajuste}
+
+`ergm(formula)`
+
+Ajusta um ERGM do tipo $\exp(\hat\theta \cdot g(y))$ a partir de uma `formula`.
+Uma `formula` tem o formato `network ~ s_1 + ... + s_n`, na qual `network` é o 
+grafo observado $y$ e `s_1 + ... + s_n` são as funções que calculam as 
+estatísticas de $g(y)$. O ajuste é feito por um algoritmo MCMCMLE de 
+Metropolis-Hastings.
+
+\subsection{Estatísticas}
+
+`edges`
+
+Número de arestas - tamanho do conjunto $\{(i, j)\}$.
+
+`nodematch(attr, diff = FALSE)`
+
+Homofilia uniforme - tamanho do conjunto 
+$\{(i, j) | \text{atributo}_i = \text{atributo}_j\}$.
+  
+`nodematch(attr, diff = TRUE)`
+
+homofilia diferencial.
+$p$ estatísticas da rede, onde $p$ é o tamanho do conjunto 
+$\{\text{atributos}\}$.
+$\{(i, j)\ | \text{atributo}_i = \text{atributo}_j = k\}$,
+onde o valor de $k$ é o menor valor único do atributo em questão.
+  
+`absdiff(attr)`
+
+diferenca absoluta - $|\text{atributo}_i - \text{atributo}_j|$.
+  
+`gwesp(decay, fixed)`
+
+...
+
+\section{EpiModel}
+
+O pacote `EpiModel` \cite{epimodel} possui uma _Application Programming
+Interface_ (API) para ajustar modelos epidemiológicos. No `EpiModel`, modelos
+determinísticos são chamados de _Deterministic Contact Models_ (DCMs), modelos
+estocásticos de  _Invidual Contact Models_ (ICMs), e modelos em redes de
+_Network Models_. 
+
+Para demonstrar o uso do `EpiModel`, fizemos o ajuste de dois modelos $SIR$, 
+um DCM e um ICM, com parâmetros iguais. O tamanho da população é $N = 1000$, com
+$\beta = 0.16$ e $\gamma = 0.02$. No tempo 0, $S = 90$ e $I = 10$. A Figura
+\@ref(fig:plot-compartment) ilustra os cenários estimados pelos modelos em
+questão.
+
+```{r plot-compartment, fig.cap = "Comparação entre ajustes DCM (linhas sólidas) e ICM (linhas tracejadas)."}
 library(EpiModel)
 # set.seed(1995)
 
@@ -164,25 +467,10 @@ init <- do.call(init.icm, inits)
 control <- do.call(control.icm, controls)
 icm_fit <- icm(param, init, control)
 
-# # ICM
-# param <- param.dcm(inf.prob = 0.2, act.rate = 0.8, rec.rate = 1/50,
-#                    a.rate = 1/100, ds.rate = 1/100, di.rate = 1/90, 
-#                    dr.rate = 1/100)
-# init <- init.dcm(s.num = 90, i.num = 10, r.num = 0)
-# control <- control.dcm(type = "SIR", nsteps = 365)
-# det <- dcm(param, init, control)
-# param <- param.icm(inf.prob = 0.2, act.rate = 0.8, rec.rate = 1/50,
-#                    a.rate = 1/100, ds.rate = 1/100, di.rate = 1/90,
-#                    dr.rate = 1/100)
-# init <- init.icm(s.num = 90, i.num = 10, r.num = 0)
-# control <- control.icm(type = "SIR", nsteps = 365, nsims = 10)
-# sim <- icm(param, init, control)
- 
 plot(
   dcm_fit,
   alpha = 0.75, lwd = 4, 
-  main = "Compartimentos (%)",
-  ylab = "", xlab = "Tempo"
+  ylab = "Número", xlab = "Tempo"
 )
 plot(
   icm_fit,
@@ -191,117 +479,99 @@ plot(
 )
 ```
 
-\section{Modelos em redes}
+Apesar do uso do `EpiModel` ser trivial para modelos comuns, tais quais o 
+$SIR$ e o $SEIR$, modelos mais complexos dependem da implementação de funções 
+customizadas, chamas de módulos. No caso de modelos em redes, primeiro é 
+necessário ajustar um STERGM por meio da função `netest`. Depois, esse ajuste 
+é utilizado pela função `netsim` para gerar simulações do modelo epidemiológico. 
+Essas simulações dependem dos módulos em questão. No caso do $SEIQHRF$, 
+programamos dois módulos: o `infect` e o `progress`.
 
-Quando o pressuposto de ... beta pode ser um vetor... 
-subpopulação espacial, classe, etc.
+O fluxo descrito acima está ilustrado no diagrama da Figura
+\@ref(fig:plot-epi-diag), e as funções relevantes detalhadas nas subseções a
+seguir.
 
-Muitas vezes, temos conhecimento de relações entre indivíduos, 
-que condicionam as probabilidades de contato entre os pares. 
-Modelos em redes...
+```{r plot-epi-diag, out.width = "100%", out.height = "100%", fig.cap = "Fluxograma da implementação."}
+fluxogram <- grViz("
+digraph boxes_and_circles {
+  # a 'graph' statement
+  graph [overlap = true, fontsize = 10]
 
-Não há soluções analíticas para essa classe de modelos, que são 
-ajustados numericamente por meio de algoritmos de Markov Chain Monte Carlo 
-\cite{missing}...
+  # several 'node' statements
+  node [shape = box, fontname = Courier]
+  ergm; stergm; netest; netsim; infect; progress
 
-... \cite{stochasticepidemic}
+  node [shape = none, fontname = Helvetica, fixedsize = true, width = 0.9]
 
-\section{SEIQHRF}
-
-Muitos conjuntos de estados foram propostos SIDARTHE \cite{giordano2020}...
-
-O SEIQHRF \cite{churches}, ilustrado na Figura \@ref(fig:seiqhrf-plot), 
-adiciona quatro estados ao SIR:
-
-* **Exposed**: infectado e assintomático. Pode infectar o suscetível;
-* **Quarantined**: infectado e sintomático. Pode infectar o suscetível, 
-  com menor probabilidade de encontro que os demais estados infectados;
-* **Hospitalized**: infectado e sintomático.
-  Não encontra suscetíveis e tem maior probabilidade de morte;
-* **Fatality**: morte.
-
-```{r seiqhrf-plot, fig.cap = "SEIQHRF. Linhas pontilhadas são infecções e linhas sólidas são progressões."} 
-states <- c("S", "E", "I", "Q", "H", "R", "F") 
-ids <- seq_along(states)
-names(ids) <- states
-from <- c('E', 'E', 'I', 'I', 'I', 'Q', 'Q', 'H', 'H', 'S', 'E', 'I', 'Q')
-to <- c('I', 'R', 'Q', 'H', 'R', 'H', 'R', 'R', 'F', 'E', 'S', 'S', 'S')
-edge_df <- create_edge_df(
-  from = ids[from], 
-  to = ids[to],
-  style = rep(c("solid", "dashed"), c(10, 3)),
-  color = "black"
-)
-plot_states(states, edge_df)
-```
-
-\section{Exponential random graph models}
-
-Formalmente, um grafo aleatório $Y \in \mathcal{Y}$ 
-consiste em um conjunto de $n$ vértices e $m$ arestas 
-$\{Y_{{ij}}:i=1,\dots ,n;j=1,\dots ,n\}$,
-no qual $Y_{ij} = 1$ se os vértices $(i,j)$ são conectados e
-$Y_{ij} = 0$ caso contrário.
-
-Exponential random graph models (ERGMs) são modelos da família exponencial que 
-descrevem grafos aleatórios.
-Um ERGM é definido como:
-
-$$
-{\displaystyle P(Y=y | \theta) = 
-{\frac {\exp(\theta ^{T}s(y))}{c(\theta )}}
-,\quad \forall y\in {\mathcal {Y}}}
-$$
-
-onde $\theta$ é um vetor de parâmetros, 
-$s(y)$ é um vetor de estatísticas suficientes e 
-$c(\theta)$ é uma constante normalizadora.
-As estatísticas suficientes podem ser funções da rede, ou de
-atributos dos vértices.
-
-ERGMs são utilizados na modelagem de redes sociais \cite{ergmsn}.
-
-\chapter{Implementação}
-
-O objetivo principal deste trabalho foi implementar um modelo epidemiológico 
-em redes, com os compartimentos $SEIQHRF$.
-Esse objetivo foi alcançado por meio de três ferramentas: 
-a linguagem de programação R \cite{r};
-o pacote `ergm` \cite{ergm} para o ajuste dos ERGMs e suas respectivas 
-simulações; e 
-o pacote `EpiModel` \cite{epimodel} para o ajuste dos modelos epidemiológicos 
-em redes e suas respectivas simulações.
-
-O uso do `ergm` para o ajuste dos ERGMs é trivial, e não será detalhado nesta 
-seção. Contudo, a implementação do SEQIHRF no `EpiModel` envolveu a 
-programação de duas funções customizadas, descrevendo o processo gerador 
-dos dados do $SEIQHRF$ em redes. Essa implementação pode ser encontrada no 
-Github... \cite{epimodel-gallery}
-
-\section{netsim}
-
-A _Application Programming Interface_ (API) para modelos em redes do 
-`EpiModel` tem uma funnção principal, a `netsim`.
-Simplificada para o contexto deste trabalho, a função é descrita pelo 
-pseudocódigo abaixo:
-
-```{r, eval = FALSE}
-netsim <- function(ergm_fit, parameters, initial_state, control) {
-  simulations <- 1:control$n_simulations
-
-  for (s in simulations) {
-    
-  }
-  steps <- 1:control$n_steps
-
+  ergm -> netest
+  stergm -> netest
+  'Grafo\nObservado' -> netest
+  'Especificação\ndo STERGM' -> netest
+  netest -> 'Ajuste\ndo STERGM'
+  'Ajuste\ndo STERGM' -> netsim
+  infect -> netsim
+  progress -> netsim
+  'Parâmetros\nSEIQHRF' -> netsim
+  netsim -> 'Simulações\nepidemiológicas'
 }
+")
+fluxogram
 ```
 
-\section{Parâmetros}
+\subsection{netest}
 
-\section{Módulos}
+Ajusta um ERGM e utiliza um método de aproximação \cite{carnegie14} para 
+transformá-lo em um STERGM, transformando um modelo de rede estática em um 
+modelo de rede dinâmica. Essa função é basicamente uma função auxiliar que 
+usa as funções `ergm` e `stergm` do pacote `ergm` em conjunto com a lógica 
+necessária para a aproximação.
+
+A aproximação depende de alguns pré-requisitos, que não exploramos a fundo 
+neste trabalho. O mais importante é que as estatísticas usadas para os 
+coeficientes de dissolução devem ser um subconjunto das estatísticas usadas 
+para os coeficientes do modelo estático. Dado isso,  grosso modo, um ERGM é 
+estimado com coeficientes de formação baseados nos coeficientes da rede 
+estática. Desses coeficientes, subtrai-se os coeficientes de dissolução.
+
+\subsection{netsim}
+
+Essa função simula os modelos epidemiológicos de acordo com os parâmetros 
+de entrada. Simplificada para o contexto deste trabalho, a `netsim` é descrita 
+pelo pseudocódigo abaixo:
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{Simulações epidemiológicas}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{
+    Ajuste do STERGM, 
+    Número de simulações, 
+    Tempo das simulações,
+    Função de infecção (infect),
+    Função de progressão (progress),
+    Parâmetros das funções de infecção e progressão
+}
+\Output{Lista de matrizes, cada uma representando uma simulação, 
+com o número de indivíduos em cada estado em cada tempo.}
+\BlankLine
+\For{simulacão = 1 até simulação = número de simulações}{
+    \For{simulacão = 1 até simulação = número de simulações}{
+        simular um STERGM a partir do ajuste\;
+        \For{tempo = 1 até tempo = tempo da simulação}{
+            formar ou dissolver arestas do STERGM\;
+            rodar o processo de infecção\; 
+            rodar o processo de progressão\;
+            salvar os resultados\;
+        }
+    }
+}
+\caption{netsim}
+\end{algorithm} 
 
 \subsection{infect}
+
+...
 
 ```{r, echo = TRUE}
 infect <- function(dat, at) {
@@ -375,6 +645,8 @@ infect <- function(dat, at) {
 
 \subsection{progress}
 
+...
+
 ```{r, echo = TRUE}
 progress <- function(dat, at) {
 
@@ -436,23 +708,45 @@ progress <- function(dat, at) {
 
 \chapter{Simulação e resultados}
 
-...
+O objetivo dessas simulações é demonstrar o modelo proposto nesta monografia, 
+que futuramente será utilizado na modelagem da COVID-19 no Aglomerado da Serra. 
+Os dados que utilizamos são um _proxy_ para os dados reais, que são uma rede 
+social representando uma pequena comunidade fechada, na qual as relações entre 
+indivíduos têm padrões por atributos de faixa etária. 
 
-\section{Ajuste do ERGM}
+\section{Simulação dos dados}
 
-O pacote `ergm` \cite{ergm} contém diversos exemplos de grafo,
-entre eles o `faux.magnolia.high`. 
+\subsection{Faux Magnolia High}
+
+O pacote `ergm` \cite{ergm} contém diversos exemplos de grafo, entre eles o 
+`faux.magnolia.high`. 
+Este grafo é uma simulação de uma rede de amigos de uma escola do sul dos 
+Estados Unidos, onde os vértices representam alunos e as arestas amizades entre 
+alunos.
+
+A documentação do `ergm` contém detalhes sobre o modelo utilizado na simulação 
+do `faux.magnolia.high`. 
+
+> The data set is based upon a model fit to data from two school
+> communities from the AddHealth Study, Wave I \cite{resnick97}.
+> It was constructed as follows:
+>
+> The two schools in question (a junior and senior high school in the
+> same community) were combined into a single network dataset.
+> Students who did not take the AddHealth survey or who were not listed
+> on the schools' student rosters were eliminated, then an undirected
+> link was established between any two individuals who both named each
+> other as a friend.  All missing race, grade, and sex values were
+> replaced by a random draw with weights determined by the size of the
+> attribute classes in the school. \cite{ergm}
 
 ```{r}
 data(faux.magnolia.high)
 summary_magnolia <- summary(faux.magnolia.high)
 ```
 
-Este grafo é uma simulação de uma rede de amigos de uma escola do sul dos 
-Estados Unidos. 
-Os vértices representam alunos, e as arestas as amizades entre alunos.
-Existem `r summary_magnolia$gal$n` alunos, e
-cada aluno tem três atributos: `Grade` (turma), `Race` (raça) e `Sex` (sexo).
+Existem `r summary_magnolia$gal$n` alunos, e cada aluno tem três atributos:
+`Grade` (turma), `Race` (raça) e `Sex` (sexo).
 
 A figura \@ref(fig:plot-magnolia) ilustra o grafo em questão.
 
@@ -487,31 +781,13 @@ invisible(lapply(
   c("Grade", "Race", "Sex"),
   plot_attribute_distribution
 ))
-# TODO add edge histogram?
 ```
 
-A documentação do `ergm` contém detalhes sobre o modelo utilizado na simulação 
-do `faux.magnolia.high`. 
+\subsection{Ajuste do ERGM}
 
-> The data set is based upon a model fit to data from two school
-> communities from the AddHealth Study, Wave I \cite{resnick97}.
-> It was constructed as follows:
->
-> The two schools in question (a junior and senior high school in the
-> same community) were combined into a single network dataset.
-> Students who did not take the AddHealth survey or who were not listed
-> on the schools' student rosters were eliminated, then an undirected
-> link was established between any two individuals who both named each
-> other as a friend.  All missing race, grade, and sex values were
-> replaced by a random draw with weights determined by the size of the
-> attribute classes in the school. \cite{ergm}
-
-Para simplificarmos a notação, 
-discutiremos a especificação do modelo na sintaxe de `formula` do R. 
-Nessa sintaxe, `dados ~ s_1 + s_2 + ... + s_n`, 
-onde `dados` é o grafo Faux Magnolia High, e
-cada `s_i` é uma ou mais estatísticas suficientes de $s(y)$.
-Na sintaxe de fórmula, a especificação do modelo é:
+Para simplificarmos a notação, discutiremos a especificação do modelo na 
+sintaxe de `formula` do `ergm`, discutida na seção de implementação.
+A especificação do modelo é:
 
 ```{r, echo = TRUE, eval = FALSE}
 magnolia ~ 
@@ -522,20 +798,6 @@ magnolia ~
   absdiff("Grade") + 
   gwesp(0.25, fixed = TRUE)
 ```
-
-As estatísticas calculadas pelas funções são:
-
-* `edges`: numero de arestas - tamanho do conjunto $\{(i, j)\}$;
-* `nodematch(attr, diff = FALSE)`: homofilia uniforme - tamanho do 
-  conjunto $\{(i, j) | \text{atributo}_i = \text{atributo}_j\}$;
-* `nodematch(attr, diff = TRUE)`: homofilia diferencial - 
-  $p$ estatísticas da rede, onde $p$ é o tamanho do conjunto 
-  $\{\text{atributos}\}$.
-  $\{(i, j)\ | \text{atributo}_i = \text{atributo}_j = k\}$,
-  onde o valor de $k$ é o menor valor único do atributo em questão;
-* `absdiff(attr)`: diferenca absoluta - 
-  $|\text{atributo}_i - \text{atributo}_j|$._
-* `gwesp(decay, fixed)`: ...
 
 ```{r}
 library(EpiModel)
@@ -605,15 +867,13 @@ kbl(
 )
 ```
 
-Usamos a especificação documentada para ajustar um ERGM, 
-As estimativas dos coeficientes deste ajuste estão na tabela
-\@ref(tab:tab-coefs-magnolia). Como nossa especificação do ERGM descreve 
-perfeitamente o processo gerador dos dados,
-não é necessário que verifiquemos o ajuste do modelo criteriosamente.
-A Figura \@ref(fig:plot-magnolia-sim) mostra um exemplo de grafo simulado a 
-partir do nosso ajuste. É visualmente notável a similaridade estrutural das 
-arestas. Nessa simulação, os vértices são idênticos, tanto em quantidade 
-quanto em atributos.
+Usamos a especificação documentada para ajustar um ERGM. As estimativas dos
+coeficientes deste ajuste estão na tabela \@ref(tab:tab-coefs-magnolia). Como
+nossa especificação do ERGM descreve perfeitamente o processo gerador dos dados,
+não é necessário que verifiquemos o ajuste do modelo criteriosamente. A Figura
+\@ref(fig:plot-magnolia-sim) mostra um exemplo de grafo simulado a partir do
+nosso ajuste. É visualmente notável a similaridade estrutural das arestas. Nessa
+simulação, os vértices são idênticos, tanto em quantidade quanto em atributos.
 
 ```{r plot-magnolia-sim, fig.cap = "Simulação gerada com nosso ajuste do Faux Magnolia High. À esquerda, apenas as arestas do grafo. À direita, os vértices coloridos de acordo com a turma do aluno."}
 magnolia_sim <- simulate(
@@ -628,68 +888,17 @@ plot_magnolia(magnolia_sim, 0)
 plot_magnolia(magnolia_sim, 1)
 ```
 
-A Figura \@ref(fig:plot-degree-comp) mostra uma comparação 
-entre a distribuição de graus dos dois grafos.
+A Figura \@ref(fig:plot-degree-comp) mostra uma comparação entre a distribuição
+de graus dos dois grafos.
 
 ```{r plot-degree-comp, fig.cap = "Comparação entre as distribuições de grau do grafo original e da simulação."}
 data(faux.magnolia.high)
 A <- as.matrix(faux.magnolia.high)
 degrees <- rowSums(A)
+barplot(prop.table(table(degrees)))
 mean(degrees)
 hist(degrees)
 ```
-
-\section{Simulações epidemiológicas}
-
-Antes de simular os modelos epidemiológicos, 
-fixamos alguns parâmetros para as simulações.
-A simulação relizada pelo `EpiModel` funciona 
-com unidades arbitrárias de tempo.
-No contexto do nosso exemplo, o tempo será contado em dias,
-e as simulações são limitadas a 200 dias.
-Essa escolha foi feita porque 200 é o número de dias letivos no Brasil.
-Por consequência, os parâmetros de taxa de encontro terão 
-uma frequência diária.
-
-```{r}
-nsteps <- 200
-```
-
-Os parâmetros fixos de infecção estão na tabela \@ref(fig:tab-inf-pars).
-
-```{r tab-inf-pars}
-# Model parameters
-# Possible infections in the SEIQHRF model
-inf.pars <- data.frame(
-  from = c("e", "i", "q"),
-  to = c("s", "s", "s"),
-  act.rate = c(10, 10, 2.5),
-  inf.prob = c(0.02, 0.05, 0.02) 
-)
-inf.pars$final.prob <- 1 - (1 - inf.pars$inf.prob)^inf.pars$act.rate
-
-inf.tab <- inf.pars
-inf.tab$from <- toupper(inf.tab$from)
-inf.tab$to <- toupper(inf.tab$to)
-inf.tab$final.prob <- round(inf.tab$final.prob, 2)
-names(inf.tab) <- c(
-  "De", "Para", "Encontros/dia",
-  "P(Infecção)", "P(Encontro e infecção)"
-)
-kbl(
-  inf.tab,
-  caption = "Parâmetros de infecção das simulações.",
-  booktabs = TRUE
-)
-```
-
-\subsection{Simulação exploratória}
-
-Ver se os parâmetros fazem sentido.
-Ver que o código está correto.
-Explorar possibilidades de visualização.
-
-O pacote `EpiModel` \cite{epimodel} da ferramentas
 
 ```{r}
 # library(parallel)
@@ -711,14 +920,104 @@ O pacote `EpiModel` \cite{epimodel} da ferramentas
 # plot(dx, plots.joined = FALSE, qnts.alpha = 0.8)
 ```
 
-```{r}
+\section{Simulações epidemiológicas}
 
-# Possible progressions in the SEIQHRF model
+Nesta seção, demonstramos o modelo $SEIQHRF$ em redes. Para o modelo da rede,
+ajustamos e simulamos ERGMs baseados em uma _high school_ estadunidense. 
+Escolhemos essa rede por representar uma pequena população com relações 
+determinadas por atributos dos indivíduos, particularmente por suas faixas 
+etárias (representadas pelas turmas dos alunos). 
+
+O projeto que originou este trabalho, *COVID-19: proposta de um modelo 
+epidemiológico que incorpora estruturas sociais de contágio*, tem como foco 
+a rede social do Aglomerado da Serra, que tem uma estrutura similar de 
+subpopulações de diferentes faixas. 
+
+Antes de simular os modelos epidemiológicos, fixamos alguns parâmetros para 
+as simulações. A simulação relizada pelo `EpiModel` funciona com unidades
+arbitrárias de tempo. No contexto do nosso exemplo, o tempo é contado em dias, e
+as simulações rodam por 170 dias. Essa escolha foi feita porque 170 é o número
+médio de dias letivos nos Estados Unidos. Por consequência, os parâmetros de
+taxa de encontro têm frequência diária. Ademais, fixamos o número de 30
+simulações por cenário. Esse número foi escolhido para obtermos um tempo
+computacional reduzido e um tamanho amostral razoável para estimarmos a
+variabilidade nas simulações.
+
+Além disso, fixamos um número inicial de 20 indivíduos expostos (assintomáticos)
+e 10 indivíduos infectados (sintomáticos). Finalmente, fixamos também os
+parâmetros relativos aos hospitais. Para a população de alunos da escola,
+estabelecemos 5 vagas no estado de hospitalização. Quando há mais de 5 alunos
+hospitalizados, significa que os hospitais estão superlotados. Por consequência,
+a probabilidade de transição para fatalidade é multiplicada por 1.5.
+
+```{r}
+# Number of steps
+nsteps <- 170
+# Number of simulations
+nsims <- 30
+# Initial conditions
+init <- init.net(e.num = 20, i.num = 10)
+```
+
+\subsection{Simulação exploratória}
+
+Fizemos uma primeira simulação exploratória, a qual chamamos de Cenário A. 
+Essa simulação teve o objetivo de demonstrar o comportamento do modelo com 
+alguns parâmetros simples. Os parâmetros de taxa de progressão entre os 
+estados da doença e de probabilidade de infecção por encontro foram sugeridos 
+no artigo que deu origem ao $SEIQHRF$ \cite{churches}, e são baseados em estudos
+preliminares da COVID-19. Os parâmetros de infecção estão na tabela
+\@ref(tab:tab-inf-pars), e os parâmetros de progressão estão na tabela
+\@ref(tab:tab-prog-pars).
+
+```{r tab-inf-pars}
+# Possible infections in the SEIQHRF model
+inf.pars <- data.frame(
+  from = c("e", "i", "q"),
+  to = c("s", "s", "s"),
+  act.rate = c(10, 10, 2.5),
+  inf.prob = c(0.02, 0.05, 0.02) 
+)
+inf.pars$final.prob <- 1 - (1 - inf.pars$inf.prob)^inf.pars$act.rate
+
+inf.tab <- inf.pars
+inf.tab$from <- toupper(inf.tab$from)
+inf.tab$to <- toupper(inf.tab$to)
+inf.tab$final.prob <- round(inf.tab$final.prob, 2)
+names(inf.tab) <- c(
+  "De", "Para", "Encontros/dia",
+  "P(Infecção)", "P(Encontro e infecção)"
+)
+kbl(
+  inf.tab,
+  caption = "Parâmetros de infecção do Cenário A.",
+  booktabs = TRUE
+)
+```
+
+```{r tab-prog-pars}
+# Progression parameters
 prog.pars <- data.frame(
   from = c('e', 'e', 'i', 'i', 'i', 'q', 'q', 'h', 'h'),
   to =   c('i', 'r', 'q', 'h', 'r', 'h', 'r', 'r', 'f'),
   rate = c(1/10, 1/20, 1/30, 1/30, 1/20, 1/30, 1/20, 1/15, 1/50)
 )
+
+prog.tab <- prog.pars
+prog.tab$from <- toupper(prog.tab$from)
+prog.tab$to <- toupper(prog.tab$to)
+prog.tab$rate <- round(prog.tab$rate, 2)
+names(prog.tab) <- c("De", "Para", "Transições/dia")
+kbl(
+  prog.tab,
+  caption = "Parâmetros de infecção do Cenário A.",
+  booktabs = TRUE
+)
+```
+
+```{r}
+source("R/module-fx.R")
+
 # Summary parameters
 states <- c(inf.pars$from, inf.pars$to, prog.pars$from, prog.pars$to)
 unique.states <- unique(states)
@@ -740,43 +1039,135 @@ param <- param.net(
   inf.pars = inf.pars,
   sum.pars = sum.pars
 )
-# Initial conditions
-init <- init.net(e.num = 10, i.num = 10)
-```
-
-```{r}
-source("R/module-fx.R")
-
 # Control settings
 control <- control.net(
   type = NULL,
   nsteps = nsteps,
-  nsims = 1,
+  nsims = nsims,
   ncores = 1, 
   infection.FUN = infect,
   progress.FUN = progress,
   verbose = FALSE
 )
 # Run the network model simulation with netsim
-sim <- netsim(magnolia, param, init, control)
-plot(sim)
+sim_path <- "models/epi-sim-A.rds"
+if (file.exists(sim_path)) {
+  sim_A <- readRDS(sim_path)
+} else {
+  sim_A <- netsim(magnolia, param, init, control)
+  saveRDS(sim_A, sim_path)
+}
 ```
 
-\subsection{Teste de hipoteses}
+Rodamos 30 simulações nesse cenário, e salvamos os resultados. Uma visualização
+interessante para modelos de grafos está na Figura
+\@ref(fig:plot-network-steps), que ilustra os estados de cada vértice da rede ao
+longo do tempo. A Figura \@ref(fig:plot-sim-A) mostra as prevalências médias ao
+longo do tempo das 30 simulações do Cenário A.
 
-Teste de hipoteses com quarentena vs. sem quarentena.
-Teste de hipoteses muitos hospitais vs. poucos hospitais
+```{r plot-network-steps, fig.cap = "Rede ao longo de uma das simulações do Cenário A. O número acima da rede é o número de dias percorridos, e as cores indicam vértices suscetíveis (azul), em estados de infecção (vermelho) e recuperados (verde)."}
+set.seed(1995)
+par(mar = rep(0.1, 4), mfrow = c(2, 2))
+ats <- c(1, 25, 50, 100)
+invisible(lapply(
+  ats, 
+  function(at) plot(
+    sim_A, 
+    type = "network", 
+    at = at, 
+    col.status = T,
+    main = at,
+    vertex.cex = 1.5
+  )
+))
+```
 
-\chapter{Conclusão}
+```{r plot-sim-A, fig.cap = "Prevalência ao longo do tempo no Cenário A. Linhas são prevalências médias, e áreas são intervalos de prevalência."}
+plot(
+  sim_A, 
+  popfrac = TRUE,
+  xlab = "Tempo",
+  ylab = "Prevalência Média",
+  targ.col = COLORS
+)
+```
 
-TODO...
+Podemos ver a distribuição por turma...
+
+\subsection{Comparação de cenários}
+
+No $SEIQHRF$, o estado de quarentena representa apenas uma situação de
+auto-quarentena para os indivíduos infectados. Contudo, podemos simular um
+cenário com taxas de encontro reduzidas para entendermos os possíveis efeitos de
+uma situação de isolamento social sobre o modelo.
+
+Dado isso, demonstramos uma comparação de cenários com o nosso modelo, reduzindo
+as taxas de encontro em 70%, produzindo os parâmetros de infecção da Tabela
+\@ref(tab:tab-inf-pars-b). Chamamos esse cenário de Cenário B em contraposição
+ao Cenário A, proposto na subseção anterior (ver tabela Tabela
+\@ref(tab:tab-inf-pars)).
+
+```{r tab-inf-pars-b}
+inf.pars$act.rate <- inf.pars$act.rate * 0.3
+inf.pars$final.prob <- 1 - (1 - inf.pars$inf.prob)^inf.pars$act.rate
+
+inf.tab <- inf.pars
+inf.tab$from <- toupper(inf.tab$from)
+inf.tab$to <- toupper(inf.tab$to)
+inf.tab$final.prob <- round(inf.tab$final.prob, 2)
+names(inf.tab) <- c(
+  "De", "Para", "Encontros/dia",
+  "P(Infecção)", "P(Encontro e infecção)"
+)
+kbl(
+  inf.tab,
+  caption = "Parâmetros de infecção do Cenário B.",
+  booktabs = TRUE
+)
+```
+
+```{r}
+param$inf.pars <- inf.pars
+# Run the network model simulation with netsim
+sim_path <- "models/epi-sim-B.rds"
+if (file.exists(sim_path)) {
+  sim_B <- readRDS(sim_path)
+} else {
+  sim_B <- netsim(magnolia, param, init, control)
+  saveRDS(sim_B, sim_path)
+}
+```
+
+Notamos que, no Cenário B, ilustrado pela Figura \@ref(fig:plot-sim-B), a 
+curva de prevalência dos estados infectados é completamente achatada, em 
+contraste ao Cenário A.
+
+```{r plot-sim-B, fig.cap = "Prevalência ao longo do tempo no Cenário A. Linhas são prevalências médias, e áreas são intervalos de prevalência."}
+plot(
+  sim_B, 
+  popfrac = TRUE,
+  xlab = "Tempo",
+  ylab = "Prevalência Média",
+  targ.col = COLORS
+)
+```
+
+
+\chapter{Conclusões e trabalhos futuros}
+
+...
 
 \postextual
 \bibliography{bibliography}
 \begin{apendicesenv}
 \partapendices
-\chapter{Código}
+\chapter{Código e versionamento}
 \end{apendicesenv}
 
 ```{r ref.label = knitr::all_labels(), echo = TRUE, eval = FALSE}
 ```
+
+```{r}
+Sys.info()
+```
+
