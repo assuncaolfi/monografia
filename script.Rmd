@@ -1,0 +1,119 @@
+```{r}
+data(faux.magnolia.high)
+```
+
+```{r, echo = TRUE, eval = FALSE}
+magnolia ~ 
+  edges +
+  nodematch("Grade", diff = TRUE) + 
+  nodematch("Race", diff = TRUE) +
+  nodematch("Sex", diff = FALSE) + 
+  absdiff("Grade") + 
+  gwesp(0.25, fixed = TRUE)
+```
+
+```{r}
+library(EpiModel)
+
+formation <- 
+  ~
+  edges +
+  nodematch("Grade", diff = T) +
+  nodematch("Race", diff = T) +
+  nodematch("Sex", diff = F) +
+  absdiff("Grade") +
+  gwesp(0.25, fixed = T)
+coef_diss <- dissolution_coefs(
+  dissolution = ~ offset(edges),
+  duration = 50
+)
+coef_diss$coef.crude <- -Inf
+magnolia_fit <- ergm(
+  faux.magnolia.high ~ 
+    edges + nodematch("Grade", diff=T) + nodematch("Race", diff=T) +
+    nodematch("Sex",diff=F) + absdiff("Grade") + gwesp(0.25,fixed=T),
+  burnin = 10000, interval = 1000, MCMCsamplesize = 2500, maxit = 25,
+  control = control.ergm(steplength = 0.25, MCMLE.maxit = 100)
+) 
+magnolia <- netest(
+  faux.magnolia.high,
+  formation = formation, 
+  target.stats = NULL,
+  coef.diss = coef_diss,
+  set.control.ergm = control.ergm(
+    MCMC.burnin = 10000,
+    MCMC.interval = 1000,
+    MCMC.samplesize = 2500,
+    MCMLE.steplength = 1,
+    MCMLE.maxit = 1
+  )
+)
+magnolia$fit <- magnolia_fit
+```
+
+```{r}
+# Number of steps
+nsteps <- 170
+# Number of simulations
+nsims <- 30
+# Initial conditions
+init <- init.net(e.num = 20, i.num = 10)
+```
+
+```{r tab-inf-pars}
+# Possible infections in the SEIQHRF model
+inf.pars <- data.frame(
+  from = c("e", "i", "q"),
+  to = c("s", "s", "s"),
+  act.rate = c(10, 10, 2.5),
+  inf.prob = c(0.02, 0.05, 0.02) 
+)
+inf.pars$final.prob <- 1 - (1 - inf.pars$inf.prob)^inf.pars$act.rate
+```
+
+```{r tab-prog-pars}
+# Progression parameters
+prog.pars <- data.frame(
+  from = c('e', 'e', 'i', 'i', 'i', 'q', 'q', 'h', 'h'),
+  to =   c('i', 'r', 'q', 'h', 'r', 'h', 'r', 'r', 'f'),
+  rate = c(1/10, 1/20, 1/30, 1/30, 1/20, 1/30, 1/20, 1/15, 1/50)
+)
+```
+
+```{r}
+source("R/module-fx.R")
+
+# Summary parameters
+states <- c(inf.pars$from, inf.pars$to, prog.pars$from, prog.pars$to)
+unique.states <- unique(states)
+sum.pars <- with(
+  prog.pars,
+  list(
+    num.names = paste(unique.states, "num", sep = "."),
+    flow.names = paste0(from, to, ".flow"),
+    prog.rates = tapply(rate, from, function(x) 1 - prod(1 - x)),
+    next.states = tapply(to, from, list),
+    next.probs = tapply(rate, from, function(x) list(x / sum(x))),
+    infective.status = unique(inf.pars$from),
+    infected.status = unique(from)
+  )   
+)
+# Param list
+param <- param.net(
+  prog.pars = prog.pars,
+  inf.pars = inf.pars,
+  sum.pars = sum.pars
+)
+# Control settings
+control <- control.net(
+  type = NULL,
+  nsteps = nsteps,
+  nsims = nsims,
+  ncores = 1, 
+  infection.FUN = infect,
+  progress.FUN = progress,
+  verbose = FALSE
+)
+
+sim_A <- netsim(magnolia, param, init, control)
+```

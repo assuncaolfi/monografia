@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.25)  30 AUG 2021 18:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.25)  4 SEP 2021 12:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -832,7 +832,7 @@ LaTeX Info: Redefining \newblock on input line 591.
 LaTeX Info: Redefining \cite on input line 618.
 \ABCItoken=\toks33
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 248.
+Package hyperref Info: Option `colorlinks' set `true' on input line 249.
 \c@quadro=\count357
 \c@loqdepth=\count358
 \cftbeforequadroskip=\skip291
@@ -845,26 +845,26 @@ Writing index file monografia.idx
 (./monografia.aux)
 \openout1 = `monografia.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 302.
-LaTeX Font Info:    ... okay on input line 302.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
 \AtBeginShipoutBox=\box68
-Package hyperref Info: Link coloring ON on input line 302.
+Package hyperref Info: Link coloring ON on input line 303.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -876,20 +876,20 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 302.
-LaTeX Info: Redefining \ref on input line 302.
-LaTeX Info: Redefining \pageref on input line 302.
-LaTeX Info: Redefining \nameref on input line 302.
+LaTeX Info: Redefining \nameref on input line 303.
+LaTeX Info: Redefining \ref on input line 303.
+LaTeX Info: Redefining \pageref on input line 303.
+LaTeX Info: Redefining \nameref on input line 303.
 \myptabbox=\box69
 \myptabboxwidth=\skip294
-LaTeX Info: Redefining \microtypecontext on input line 302.
+LaTeX Info: Redefining \microtypecontext on input line 303.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 302.
+LaTeX Info: Redefining \showhyphens on input line 303.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -918,7 +918,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 3
-19.
+20.
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -932,39 +932,39 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-28.
+29.
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-28.
+29.
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-328.
+329.
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-328.
+329.
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 328.
+(Font)              <10> on input line 329.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 328.
+(Font)              <7> on input line 329.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 328.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 328
+(Font)              <5> on input line 329.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 329
 .
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 328
+LaTeX Font Info:    Trying to load font information for U+msb on input line 329
 .
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -974,39 +974,39 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.328 
+l.329 
        [1
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 372--372
+Underfull \hbox (badness 10000) in paragraph at lines 373--373
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--372
+Underfull \hbox (badness 10000) in paragraph at lines 373--373
 
  []
 
 
-Overfull \hbox (16.2819pt too wide) in paragraph at lines 372--372
+Overfull \hbox (16.2819pt too wide) in paragraph at lines 373--373
 []  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--372
+Underfull \hbox (badness 10000) in paragraph at lines 373--373
 
  []
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 372.
+(Font)              <8> on input line 373.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 372.
+(Font)              <6> on input line 373.
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.391 
+l.392 
        [2] [3
 
 ] [4
@@ -1032,289 +1032,255 @@ Package babel Info: Importing basic data for english
 
 ] (./monografia.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 51.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
+(Font)              <10.95> on input line 48.
+) [19] [20
 
-[19] [20] (./monografia.toc)
-Underfull \vbox (badness 10000) has occurred while \output is active []
+] (./monografia.toc) [21] [22
 
-[21
+]
 
-] [22]
+LaTeX Warning: Citation `sidarthe' on page 23 undefined on input line 607.
 
-LaTeX Warning: Citation `sidarthe' on page 23 undefined on input line 583.
-
-[23
-
-] [24
+[23] [24
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 6
-29.
+56.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<monografia_files/figure-latex/plot-sir-1.pdf, id=293, 1003.75pt x 582.175pt>
+<monografia_files/figure-latex/plot-sir-1.pdf, id=280, 1003.75pt x 582.175pt>
 File: monografia_files/figure-latex/plot-sir-1.pdf Graphic file (type pdf)
 <use monografia_files/figure-latex/plot-sir-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-sir-1.pdf  used on 
-input line 644.
+input line 671.
 (pdftex.def)             Requested size: 316.24419pt x 183.42163pt.
 [25 <./monografia_files/figure-latex/plot-sir-1.pdf>]
-<monografia_files/figure-latex/seiqhrf-plot-1.pdf, id=317, 1003.75pt x 582.175p
+<monografia_files/figure-latex/seiqhrf-plot-1.pdf, id=304, 1003.75pt x 582.175p
 t>
 File: monografia_files/figure-latex/seiqhrf-plot-1.pdf Graphic file (type pdf)
 <use monografia_files/figure-latex/seiqhrf-plot-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/seiqhrf-plot-1.pdf  used
- on input line 685.
+ on input line 712.
 (pdftex.def)             Requested size: 316.24419pt x 183.42163pt.
-
-LaTeX Warning: Citation `epi' on page 26 undefined on input line 695.
-
 [26 <./monografia_files/figure-latex/seiqhrf-plot-1.pdf>] [27] [28] [29] [30
 
 ]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
-01.
+39.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-LaTeX Warning: Citation `myself' on page 31 undefined on input line 908.
+LaTeX Warning: Citation `myself' on page 31 undefined on input line 946.
 
 [31]
-<monografia_files/figure-latex/plot-compartment-1.pdf, id=396, 469.755pt x 325.
+<monografia_files/figure-latex/plot-compartment-1.pdf, id=388, 469.755pt x 325.
 215pt>
 File: monografia_files/figure-latex/plot-compartment-1.pdf Graphic file (type p
 df)
 <use monografia_files/figure-latex/plot-compartment-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-compartment-1.pdf  
-used on input line 974.
+used on input line 1007.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-<monografia_files/figure-latex/plot-epi-diag-1.pdf, id=398, 1003.75pt x 582.175
+<monografia_files/figure-latex/plot-epi-diag-1.pdf, id=390, 1003.75pt x 582.175
 pt>
 File: monografia_files/figure-latex/plot-epi-diag-1.pdf Graphic file (type pdf)
 
 <use monografia_files/figure-latex/plot-epi-diag-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-epi-diag-1.pdf  use
-d on input line 995.
+d on input line 1028.
 (pdftex.def)             Requested size: 472.00763pt x 273.76442pt.
 [32 <./monografia_files/figure-latex/plot-compartment-1.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [33 <./monografia_files/figure-latex/plot-epi-diag-1.pdf>]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1059.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 1061.
-
-
-[34]
-Underfull \vbox (badness 10000) detected at line 1127
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1127
- []
-
-[35] [36] [37] [38
+[34] [35] [36
 
 ]
-Underfull \hbox (badness 2680) in paragraph at lines 1212--1214
-[]\T1/lmr/m/n/10 (+20) A do-cu-men-ta-ção do \T1/lmtt/m/n/10 ergm \T1/lmr/m/n/1
-0 (+20) con-tém de-ta-lhes so-bre o mo-delo uti-li-zado na si-mu-la-ção do
- []
-
-<monografia_files/figure-latex/plot-magnolia-1.pdf, id=480, 469.755pt x 325.215
+<monografia_files/figure-latex/plot-magnolia-1.pdf, id=475, 469.755pt x 325.215
 pt>
 File: monografia_files/figure-latex/plot-magnolia-1.pdf Graphic file (type pdf)
 
 <use monografia_files/figure-latex/plot-magnolia-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-magnolia-1.pdf  use
-d on input line 1237.
+d on input line 1188.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-<monografia_files/figure-latex/plot-attr-distr-1.pdf, id=482, 469.755pt x 325.2
+<monografia_files/figure-latex/plot-attr-distr-1.pdf, id=476, 469.755pt x 325.2
 15pt>
 File: monografia_files/figure-latex/plot-attr-distr-1.pdf Graphic file (type pd
 f)
 <use monografia_files/figure-latex/plot-attr-distr-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-attr-distr-1.pdf  u
-sed on input line 1249.
+sed on input line 1197.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-
-Overfull \vbox (0.92107pt too high) detected at line 1272
- []
-
-[39] [40 <./monografia_files/figure-latex/plot-magnolia-1.pdf> <./monografia_fi
+[37] [38 <./monografia_files/figure-latex/plot-magnolia-1.pdf> <./monografia_fi
 les/figure-latex/plot-attr-distr-1.pdf>]
-<monografia_files/figure-latex/plot-magnolia-sim-1.pdf, id=503, 469.755pt x 325
+<monografia_files/figure-latex/plot-magnolia-sim-1.pdf, id=498, 469.755pt x 325
 .215pt>
 File: monografia_files/figure-latex/plot-magnolia-sim-1.pdf Graphic file (type 
 pdf)
 <use monografia_files/figure-latex/plot-magnolia-sim-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-magnolia-sim-1.pdf 
- used on input line 1315.
+ used on input line 1265.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-
-LaTeX Warning: Reference `fig:plot-degree-comp' on page 41 undefined on input l
-ine 1322.
-
-<monografia_files/figure-latex/plot-degree-comp-1.pdf, id=504, 469.755pt x 325.
+<monografia_files/figure-latex/plot-degree-comp-1.pdf, id=499, 469.755pt x 325.
 215pt>
 File: monografia_files/figure-latex/plot-degree-comp-1.pdf Graphic file (type p
 df)
 <use monografia_files/figure-latex/plot-degree-comp-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-degree-comp-1.pdf  
-used on input line 1327.
+used on input line 1274.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-[41 <./monografia_files/figure-latex/plot-magnolia-sim-1.pdf>]
-<monografia_files/figure-latex/plot-degree-comp-2.pdf, id=513, 469.755pt x 325.
-215pt>
-File: monografia_files/figure-latex/plot-degree-comp-2.pdf Graphic file (type p
-df)
-<use monografia_files/figure-latex/plot-degree-comp-2.pdf>
-Package pdftex.def Info: monografia_files/figure-latex/plot-degree-comp-2.pdf  
-used on input line 1340.
-(pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-[42 <./monografia_files/figure-latex/plot-degree-comp-1.pdf> <./monografia_file
-s/figure-latex/plot-degree-comp-2.pdf>]
-<monografia_files/figure-latex/plot-network-steps-1.pdf, id=535, 469.755pt x 32
+
+Underfull \vbox (badness 2573) has occurred while \output is active []
+
+[39 <./monografia_files/figure-latex/plot-magnolia-sim-1.pdf>] [40 <./monografi
+a_files/figure-latex/plot-degree-comp-1.pdf>]
+<monografia_files/figure-latex/plot-network-steps-1.pdf, id=522, 469.755pt x 32
 5.215pt>
 File: monografia_files/figure-latex/plot-network-steps-1.pdf Graphic file (type
  pdf)
 <use monografia_files/figure-latex/plot-network-steps-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-network-steps-1.pdf
-  used on input line 1433.
+  used on input line 1367.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-<monografia_files/figure-latex/plot-sim-A-1.pdf, id=536, 469.755pt x 325.215pt>
+<monografia_files/figure-latex/plot-sim-A-1.pdf, id=523, 469.755pt x 325.215pt>
 
 File: monografia_files/figure-latex/plot-sim-A-1.pdf Graphic file (type pdf)
 <use monografia_files/figure-latex/plot-sim-A-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-sim-A-1.pdf  used o
-n input line 1442.
+n input line 1376.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-[43] [44 <./monografia_files/figure-latex/plot-network-steps-1.pdf> <./monograf
-ia_files/figure-latex/plot-sim-A-1.pdf>]
-<monografia_files/figure-latex/plot-sim-B-1.pdf, id=566, 469.755pt x 325.215pt>
+[41 <./monografia_files/figure-latex/plot-network-steps-1.pdf>]
+<monografia_files/figure-latex/plot-sim-B-1.pdf, id=541, 469.755pt x 325.215pt>
 
 File: monografia_files/figure-latex/plot-sim-B-1.pdf Graphic file (type pdf)
 <use monografia_files/figure-latex/plot-sim-B-1.pdf>
 Package pdftex.def Info: monografia_files/figure-latex/plot-sim-B-1.pdf  used o
-n input line 1485.
+n input line 1421.
 (pdftex.def)             Requested size: 316.23947pt x 218.93501pt.
-[45 <./monografia_files/figure-latex/plot-sim-B-1.pdf>] [46
+[42 <./monografia_files/figure-latex/plot-sim-A-1.pdf>] [43 <./monografia_files
+/figure-latex/plot-sim-B-1.pdf>] [44
 
 ] (./monografia.bbl (./monografia.brf)
 \tf@brf=\write6
 \openout6 = `monografia.brf'.
 
-[47] [48
+[45] [46
 
 ]
 bibitemlist
-) [49] [50
-
-]
+) [47] [48]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 1500.
+(hyperref)                removing `\uppercase' on input line 1443.
 
-[51
+[49
 
-] [52]
+
+] [50]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1461.
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-1550.
+1493.
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \vbox (badness 1360) detected at line 2010
+
+LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 1563.
+
+
+
+Underfull \vbox (badness 1360) detected at line 1960
  []
 
-[53
+[51
 
 ]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
+ []
+
+[52]
+Underfull \vbox (badness 10000) detected at line 1960
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1960
+ []
+
+[53]
+Underfull \vbox (badness 10000) detected at line 1960
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 [54]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 [55]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 [56]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 [57]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 [58]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 [59]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 [60]
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2010
+Underfull \vbox (badness 10000) detected at line 1960
  []
 
-[61]
-Underfull \vbox (badness 10000) detected at line 2010
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2010
- []
-
-[62]
-Underfull \vbox (badness 10000) detected at line 2010
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2010
- []
-
-[63] [64] [65]
+[61] [62]
 \tf@lof=\write7
 \openout7 = `monografia.lof'.
 
@@ -1324,51 +1290,52 @@ Underfull \vbox (badness 10000) detected at line 2010
 \tf@toc=\write9
 \openout9 = `monografia.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2031.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2031.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1963.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1963.
 (./monografia.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2031.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2031.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1963.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1963.
 
 Package rerunfilecheck Info: File `monografia.brf' has not changed.
-(rerunfilecheck)             Checksum: 314A2634FA62F8F896BB694C1B4F48DF;1228.
+(rerunfilecheck)             Checksum: 2BF7033B8C8E3C4BF15DE64062FD845C;1181.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2031.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1963.
  ) 
 Here is how much of TeX's memory you used:
- 21240 strings out of 483090
- 322736 string characters out of 5963929
- 835903 words of memory out of 5000000
- 35571 multiletter control sequences out of 15000+600000
- 623990 words of font info for 162 fonts, out of 8000000 for 9000
+ 21229 strings out of 483090
+ 322339 string characters out of 5963929
+ 836903 words of memory out of 5000000
+ 35551 multiletter control sequences out of 15000+600000
+ 624224 words of font info for 164 fonts, out of 8000000 for 9000
  61 hyphenation exceptions out of 8191
  42i,18n,44p,991b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/d
-vips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/shar
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
+ips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
 m-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}</usr/share/texmf/f
 onts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx7.p
 fb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/t
-ype1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi7.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/t
-exmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mri8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.
-pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/fonts/t
-ype1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb>
-</usr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1
-/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/s
-hare/texmf/fonts/type1/public/lm/lmtko10.pfb></usr/share/texmf/fonts/type1/publ
-ic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on monografia.pdf (67 pages, 2863503 bytes).
+ype1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/
+texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lm
+ri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf/fo
+nts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss12.p
+fb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb></usr/share/texmf/fonts/t
+ype1/public/lm/lmss9.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb><
+/usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1
+/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr/sh
+are/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public
+/lm/lmtko10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/
+texmf/fonts/type1/public/lm/lmtti10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/symbols/msbm7.pfb>
+Output written on monografia.pdf (64 pages, 2867533 bytes).
 PDF statistics:
- 957 PDF objects out of 1000 (max. 8388607)
- 826 compressed objects within 9 object streams
- 166 named destinations out of 1000 (max. 500000)
- 24989 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 938 PDF objects out of 1000 (max. 8388607)
+ 811 compressed objects within 9 object streams
+ 172 named destinations out of 1000 (max. 500000)
+ 24960 words of extra memory for PDF output out of 29859 (max. 10000000)
 

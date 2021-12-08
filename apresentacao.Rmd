@@ -154,6 +154,8 @@ $$\{\Pr_{\theta}(Y), Y \in \mathcal{Y}_n, \theta \in \Theta  \},$$
 
 $$\mathcal{Y}_n=\{Y = (E, V), |V| = n, Y \textrm{ simples}\}$$
 
+$Y_{ij}$ denota o valor das arestas conectando os vértices $(i,j)$.
+
 ---
 
 ## Exponential random graph models
@@ -216,17 +218,14 @@ de arestas são independentes
 
 ### Estatísticas
 
-* `edges`: número de arestas - tamanho do conjunto $\{(i, j)\}$
-* `nodematch(attr, diff = FALSE)`: homofilia uniforme - tamanho do conjunto 
-$\{(i, j) | \text{atributo}_i = \text{atributo}_j\}$
-* `nodematch(attr, diff = TRUE)` - homofilia diferencial.
-$p$ estatísticas da rede, onde $p$ é o tamanho do conjunto 
-$\{\text{atributos}\}$.
-$\{(i, j)\ | \text{atributo}_i = \text{atributo}_j = k\}$,
-onde o valor de $k$ é o menor valor único do atributo em questão.
+* `edges`: número de arestas - tamanho do conjunto $\{(i, j) \vert Y_{ij} = 1\}$
+* `nodematch(attr)`: homofilia - tamanho dos conjuntos 
+$\{(i, j) | \vert Y_{ij} = 1, \text{atributo}_i = \text{atributo}_j\}$
+para cada atributo
 * `absdiff(attr)`  diferença absoluta - 
-$|\text{atributo}_i - \text{atributo}_j|$.
-* `gwesp(decay, fixed)`: ...
+$\sum_{(i,j) \vert Y_{ij} = 1}| \text{atributo}_i - \text{atributo}_j|$
+* `gwesp`: número de _shared partners_ da rede. 
+Tamanho do conjunto $\{(i,j)|Y_{ij} = 1, Y_{ik} = 1, Y_{jk} = 1\}$
 
 ---
 
@@ -382,7 +381,7 @@ plot_magnolia(faux.magnolia.high, 1)
 ```{r plot-attr-distr, fig.cap = "Proporções dos níveis de cada atributo do Faux Magnolia High."}
 plot_attribute_distribution <- function(attribute) {
   tab <- table(get.node.attr(faux.magnolia.high, attribute))
-  barplot(prop.table(tab), names.arg = names(tab), main = attribute, col = COLORS[1], density = 50)
+  barplot(prop.table(tab), names.arg = names(tab), main = attribute, col = COLORS[3], density = 50)
 }
 
 par(mfrow = c(2, 2))
@@ -511,7 +510,7 @@ barplot(
   legend = c("original", "simulação"),
   beside = TRUE,
   density = c(0, 50),
-  col = COLORS[1]
+  col = COLORS[3]
 )
 ```
 
@@ -680,10 +679,6 @@ plot(
   targ.col = COLORS
 )
 ```
-
----
-
-Podemos ver a distribuição por turma...
 
 ---
 

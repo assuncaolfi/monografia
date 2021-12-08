@@ -58,14 +58,14 @@
 	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
 	\imprimirdata.}\\
 	
-	\hspace{0.5cm}
-		1. Palavra-chave1.
-		2. Palavra-chave2.
-		2. Palavra-chave3.
-		I. Orientador.
-		II. Universidade xxx.
-		III. Faculdade de xxx.
-		IV. Título 			
+	\vspace{0.5cm}
+		1. epidemiologia.
+		2. SEIQHRF.
+		2. ERGM.
+		I. Adrian Luna.
+		II. Universidade Federal de Minas Gerais.
+		III. Instituto de Ciências Exatas.
+		IV. Modelo epidemiológico com compartimentos SEIQHRF em redes.
 	\end{minipage}}
 	\end{center}
 \end{fichacatalografica}
@@ -102,11 +102,11 @@
     \vspace*{\fill}
    \end{center}
         
-   Trabalho aprovado. \imprimirlocal, 1 de novembro de 2021:
+   Trabalho aprovado. \imprimirlocal, 9 de setembro de 2021:
 
-   \assinatura{\textbf{\imprimirorientador} \\ Adrian Luna} 
-   \assinatura{\textbf{Professor} \\ Ilka Reis}
-   \assinatura{\textbf{Professor} \\ Glaura Franco}
+   \assinatura{\textbf{Orientador} \\ Adrian Luna} 
+   \assinatura{\textbf{Professora} \\ Ilka Reis}
+   \assinatura{\textbf{Professora} \\ Glaura Franco}
       
    \begin{center}
     \vspace*{0.5cm}
@@ -192,7 +192,7 @@
   grafos aleatórios; detalhamentos sobre a implementação do SEIQHRF; 
   ajuste e simulação de um ERGM (exponential random graph model) 
   representando uma escola de ensino médio; exemplos de simulações e 
-  testes de hipóteses utilizando o SEIQHRF no grafo em questão.
+  comparações de cenários utilizando o SEIQHRF no grafo em questão.
 
    \vspace{\onelineskip}
  
@@ -203,12 +203,35 @@
 % resumo em inglês
 \begin{resumo}[Abstract]
  \begin{otherlanguage*}{english}
-   This is the english abstract.
+   The pandemic caused by COVID-19 drove the development of new epidemiological 
+   models, with the intent of improving decision making over new public policies 
+   against the disease. 
+   Given that the pandemic impacts not only infected individuals, but also 
+   society as a whole, many of these models describe social and structural 
+   consequences of the pandemic, such as quarantines and hospital overload. 
+   Thus, compartmental epidemiological models divide the population in 
+   compartments, describing the states of individuals. Usually, states are only 
+   descriptors of the disease, but for the pandemic it is useful to generalize 
+   them to represent social characteristics of individuals. 
+   This work was developed based on one of these new models, SEIQHRF (
+   Susceptible, Exposed, Infected, Quarantined, Hospitalized, 
+  Recovered, Fatality). The objective was to implement numeric simulations of 
+  SEIQHRF in graphs, representing social networks. 
+  Besides, we also exemplify some use cases for the simulations. Until the date 
+  of publication of this work, there were only implementation of SEIQHRF 
+  considering homogeneous mixing of the population. With our implementation, 
+  it is now possible to simulate the model for small populations with more 
+  complex mixing patterns.
+  The content of this work ahs the following order: an introduction to the 
+  basic concepts of epidemiology and random graphs; details on the SEIQHRF 
+  implementation; fitting and simulating of an ERGM (exponential random 
+  graph model) representing a high school; simulation and scenario comparison 
+  examples using SEIQHRF in the simulated graphs.
 
    \vspace{\onelineskip}
  
    \noindent 
-   \textbf{Keywords}: latex. abntex. text editoration.
+   \textbf{Keywords}: COVID-19. epidemiology. ERGM. SEIQHRF
  \end{otherlanguage*}
 \end{resumo}
 

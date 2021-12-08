@@ -53,7 +53,7 @@ SEIQHRF considerando populações de misturas homogêneas. Agora, com a nossa
 implementação, é possível fazer simulações do modelo em questão para pequenas 
 populações, considerando estruturas mais complexas de mistura.
 
-O conteúdo deste trabalho tem a seguinte ordem:  uma introdução aos conceitos
+O conteúdo deste trabalho tem a seguinte ordem: uma introdução aos conceitos
 básicos de modelos epidemiológicos e grafos aleatórios; detalhamentos sobre a
 implementação do SEIQHRF; ajuste e simulação de um ERGM (exponential random
 graph model) representando uma escola de ensino médio; exemplos de simulações e
@@ -61,7 +61,10 @@ testes de hipóteses utilizando o SEIQHRF no grafo em questão.
 
 \chapter{Metodologia}
 
-...
+Nesta seção, fazemos uma breve revisão dos conceitos necessários para o 
+desenvolvimento deste trabalho. Descrevemos conjuntos de estados e 
+exemplificamos alguns deles, modelos epidemiológicos e também modelos de 
+grafos aleatórios.
 
 \section{Conjuntos de estados}
 
@@ -164,28 +167,38 @@ plot_states(states, edge_df)
 \section{Modelos epidemiológicos}
 
 Esses modelos descrevem a proporção de indivíduos de uma população em cada 
-estado ao longo do tempo... \cite{epi}
+estado ao longo do tempo \cite{infectiousdiseases}. Existem três maneiras 
+de definir esse tipo de modelo: determinística e estocasticamente, e em redes. 
+Nesta seção, detalharemos modelos determinísticos, comentaremos modelos 
+estocásticos e faremos sua conexão com o tipo de modelo que será usado ao longo 
+deste trabalho: modelos em redes.
 
 \subsection{Determinístico}
 
 Sem dinâmicas vitais (processos naturais de nascimento e morte) e com uma 
 população com mistura homogênea (na qual os indivíduos têm probabilidades 
-idênticas de se encontrarem), o $SIR$ é definido pelo seguinte conjunto de
-equações diferenciais \cite{keeling2005}:
+idênticas de se encontrarem), o $SIR$ determinísticos é definido por um 
+sistema de equações diferenciais \cite{keeling2005}. Seja $t$ o tempo, o número 
+de Susceptíveis $N_S(t)$, Infectados $N_I(t)$ e Recuperados $N_R(t)$ na 
+população:
 
 $$
-\begin{aligned}
-\diff{S}{t} &= -\beta SI \\
-\diff{I}{t} &= \beta SI - \gamma I \\
-\diff{R}{t} &= \gamma I
+\begin{aligned} 
+\frac{dN_S(t)}{dt} &= -\frac{\beta N_I(t)N_S(t)}{N}, \\ 
+\frac{dN_I(t)}{dt} &=\frac{\beta N_I(t)S(t)}{N} -\gamma N_I(t),\\
+\frac{dN_R(t)}{dt} &=\gamma N_I(t).
 \end{aligned}
 $$
+onde $\beta$ é a taxa de contatos entre suscetíveis e infectados, e a 
+probabilidade de ser infectado é $\frac{ N_I(t)}{N}$. A taxa de recuperação é
+$\gamma$. Se $N$ é o tamanho constante da população, então 
+$N_S(t)+N_I(t)+N_R(t)=N$.
 
-Onde $\beta$ é a taxa de transmissão, $\gamma$ é a taxa de recuperação da 
-doença, e $S + I + R = 1$.
-... R_0
-
-Dados os mesmos pressupostos, o $SEIQHRF$ é definido por um conjunto similar:
+Dados os mesmos pressupostos, o $SEIQHRF$ é definido por um conjunto similar. 
+Exemplificamos o sistema abaixo, mas não detalharemos o significado de cada 
+parâmetro. Esses significados podem ser inferidos pela Figura 
+\@ref(fig:seiqhrf-plot) e são tratados empiricamente na seção de simulações
+(ver Tabelas \@ref(tab:tab-inf-pars) e \@ref(tab:tab-prog-pars)).
 
 $$
 \begin{aligned}
@@ -198,11 +211,11 @@ $$
 \frac{dN_F(t)}{dt} &=\mu_F N_H(t),\\
 \end{aligned}
 $$
-...
 
-\subsection{Estocástico}
-
-... \cite{stochasticepidemic}
+Existe também uma definição estocástica para esse tipo de modelo, que é similar 
+à definição de redes que daremos na próxima subseção, mas sem estruturas de 
+vizinhança. Como a definição é bem similar à de redes, não a detalhamos neste 
+trabalho.
 
 \subsection{Em redes}
 
@@ -360,9 +373,10 @@ onde $\Delta g(y)_{ij} = (g(y) \vert y_{ij} = 1) - (g(y) \vert y_{ij} = 0)$.
 Implementações de variações dessa ideia costumam ser feitas por meio de 
 algoritmos de Metropolis-Hastings \cite{hunter-handcock-2006}.
 
-\subsection{Separable TERGMs}
-
-...
+Existe um caso especial de TERGMs, que são os _Separable TERGMs_. São 
+especificações nas quais os parâmetros de formação e dissolução de arestas 
+são independentes uns dos outros, por isso o nome _separável_. No contexto 
+deste trabalho, todo TERGM é um STERGM.
 
 \chapter{Implementação}
 
@@ -404,28 +418,23 @@ Metropolis-Hastings.
 
 `edges`
 
-Número de arestas - tamanho do conjunto $\{(i, j)\}$.
+Número de arestas - tamanho do conjunto $\{(i, j) \vert Y_{ij} = 1\}$.
 
-`nodematch(attr, diff = FALSE)`
+`nodematch(attr)`: 
 
-Homofilia uniforme - tamanho do conjunto 
-$\{(i, j) | \text{atributo}_i = \text{atributo}_j\}$.
-  
-`nodematch(attr, diff = TRUE)`
+Homofilia - tamanho dos conjuntos 
+$\{(i, j) | \vert Y_{ij} = 1, \text{atributo}_i = \text{atributo}_j\}$
+para cada atributo.
 
-homofilia diferencial.
-$p$ estatísticas da rede, onde $p$ é o tamanho do conjunto 
-$\{\text{atributos}\}$.
-$\{(i, j)\ | \text{atributo}_i = \text{atributo}_j = k\}$,
-onde o valor de $k$ é o menor valor único do atributo em questão.
-  
 `absdiff(attr)`
 
-diferenca absoluta - $|\text{atributo}_i - \text{atributo}_j|$.
-  
-`gwesp(decay, fixed)`
+Diferença absoluta - 
+$\sum_{(i,j) \vert Y_{ij} = 1}| \text{atributo}_i - \text{atributo}_j|$
 
-...
+`gwesp`
+
+Número de _shared partners_ da rede. 
+Tamanho do conjunto $\{(i,j)|Y_{ij} = 1, Y_{ik} = 1, Y_{jk} = 1\}$.
 
 \section{EpiModel}
 
@@ -489,7 +498,7 @@ programamos dois módulos: o `infect` e o `progress`.
 
 O fluxo descrito acima está ilustrado no diagrama da Figura
 \@ref(fig:plot-epi-diag), e as funções relevantes detalhadas nas subseções a
-seguir.
+seguir. As funções completas em R estão disponíveis no Apêndice A.
 
 ```{r plot-epi-diag, out.width = "100%", out.height = "100%", fig.cap = "Fluxograma da implementação."}
 fluxogram <- grViz("
@@ -545,12 +554,12 @@ pelo pseudocódigo abaixo:
 \KwResult{Simulações epidemiológicas}
 \SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
 \Input{
-    Ajuste do STERGM, 
-    Número de simulações, 
-    Tempo das simulações,
-    Função de infecção (infect),
-    Função de progressão (progress),
-    Parâmetros das funções de infecção e progressão
+    Ajuste do STERGM, \;
+    Número de simulações, \; 
+    Tempo das simulações, \;
+    Função de infecção (infect), \;
+    Função de progressão (progress), \;
+    Parâmetros das funções de infecção e progressão \;
 }
 \Output{Lista de matrizes, cada uma representando uma simulação, 
 com o número de indivíduos em cada estado em cada tempo.}
@@ -569,11 +578,35 @@ com o número de indivíduos em cada estado em cada tempo.}
 \caption{netsim}
 \end{algorithm} 
 
-\subsection{infect}
+\subsection{infect e progress}
 
-...
+A função `infect` é o módulo responsável por realizar o processo de infecção a 
+cada tempo $t$ da simulação. Simplificadamente, a função pode ser descripta 
+pelo pseucódigo:
 
-```{r, echo = TRUE}
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{Simulação no tempo t}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{
+    Grafo no tempo t,
+    Estados dos vértices no tempo t,
+    Parâmetros de infecção
+  }
+\Output{
+    Estados dos vértices após a infecção no tempo t
+  }
+\BlankLine
+arestas discordantes = arestas que conectam uma pessoa suscetível a outra em
+algum estado infeccioso\;
+\For{todas as as arestas discordantes}{
+    o vértices suscetível é infectado com probabilidade = probabilidade dos indíduos se encontrarem e se infectarem\;
+}
+\caption{infect}
+\end{algorithm} 
+
+```{r}
 infect <- function(dat, at) {
 
   ## Attributes ##
@@ -643,11 +676,35 @@ infect <- function(dat, at) {
 }
 ```
 
-\subsection{progress}
+Analogamente, há também a função `progress`, que é responsável pela progressão 
+entre estados do modelo. Ela está simplificada no pseudocódigo:
 
-...
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{Simulação no tempo t}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{
+    Grafo no tempo t,\;
+    Estados dos vértices no tempo t,\;
+    Parâmetros de progressão\;
+  }
+\Output{
+    Estados dos vértices após a progressão no tempo t
+  }
+\BlankLine
+vértices com possibilidade de progressão = vértices que estão em algum estado 
+que pode progredir a outro estado\;
+\For{todas as arestas com possibilidade de progressão}{
+    o vértice progride com probabilidade = 1 - probabilidade de não progredir a 
+    estado algum\;
+    o vértice progride para o estado com probabilidade proporcional às 
+    taxas de progressão do estado em questão\;
+}
+\caption{progress}
+\end{algorithm} 
 
-```{r, echo = TRUE}
+```{r}
 progress <- function(dat, at) {
 
   ## Attributes ##
@@ -724,8 +781,10 @@ Este grafo é uma simulação de uma rede de amigos de uma escola do sul dos
 Estados Unidos, onde os vértices representam alunos e as arestas amizades entre 
 alunos.
 
-A documentação do `ergm` contém detalhes sobre o modelo utilizado na simulação 
-do `faux.magnolia.high`. 
+A documentação do `ergm` contém detalhes sobre a coleta dos dados do grafo 
+Magnolia original, e também sobre o modelo utilizado para anonimizar os 
+dados e simular o `faux.magnolia.high`. Detalhes sobre o modelo estão na 
+próxima subseção, e detalhes sobre a coleta na citação direta abaixo:  
 
 > The data set is based upon a model fit to data from two school
 > communities from the AddHealth Study, Wave I \cite{resnick97}.
@@ -747,8 +806,9 @@ summary_magnolia <- summary(faux.magnolia.high)
 
 Existem `r summary_magnolia$gal$n` alunos, e cada aluno tem três atributos:
 `Grade` (turma), `Race` (raça) e `Sex` (sexo).
-
 A figura \@ref(fig:plot-magnolia) ilustra o grafo em questão.
+A figura \@ref(fig:plot-attr-distr) ilustra a proporção dos níveis de cada 
+atributo.
 
 ```{r plot-magnolia, fig.cap = "Faux Magnolia High. À esquerda, apenas as arestas do grafo. À direita, os vértices coloridos de acordo com a turma do aluno."}
 library(ergm)
@@ -766,9 +826,6 @@ par(mar = rep(0, 4), mfrow = c(1, 2))
 plot_magnolia(faux.magnolia.high, 0)
 plot_magnolia(faux.magnolia.high, 1)
 ```
-
-A figura \@ref(fig:plot-attr-distr) ilustra a proporção dos níveis de cada 
-atributo.
 
 ```{r plot-attr-distr, fig.cap = "Proporções dos níveis de cada atributo do Faux Mangolia High."}
 plot_attribute_distribution <- function(attribute) {
@@ -874,6 +931,9 @@ não é necessário que verifiquemos o ajuste do modelo criteriosamente. A Figur
 \@ref(fig:plot-magnolia-sim) mostra um exemplo de grafo simulado a partir do
 nosso ajuste. É visualmente notável a similaridade estrutural das arestas. Nessa
 simulação, os vértices são idênticos, tanto em quantidade quanto em atributos.
+A Figura \@ref(fig:plot-degree-comp) mostra uma comparação entre a distribuição
+de graus dos dois grafos.
+
 
 ```{r plot-magnolia-sim, fig.cap = "Simulação gerada com nosso ajuste do Faux Magnolia High. À esquerda, apenas as arestas do grafo. À direita, os vértices coloridos de acordo com a turma do aluno."}
 magnolia_sim <- simulate(
@@ -888,16 +948,21 @@ plot_magnolia(magnolia_sim, 0)
 plot_magnolia(magnolia_sim, 1)
 ```
 
-A Figura \@ref(fig:plot-degree-comp) mostra uma comparação entre a distribuição
-de graus dos dois grafos.
-
 ```{r plot-degree-comp, fig.cap = "Comparação entre as distribuições de grau do grafo original e da simulação."}
 data(faux.magnolia.high)
 A <- as.matrix(faux.magnolia.high)
-degrees <- rowSums(A)
-barplot(prop.table(table(degrees)))
-mean(degrees)
-hist(degrees)
+original_degrees <- rowSums(A)
+A <- as.matrix(magnolia_sim)
+sim_degrees <- rowSums(A)
+original_tab <- c(prop.table(table(original_degrees)), 0)
+sim_tab <- prop.table(table(sim_degrees))
+barplot(
+  matrix(c(original_tab, sim_tab), nrow = 2, byrow = TRUE),
+  legend = c("original", "simulação"),
+  beside = TRUE,
+  density = c(0, 50),
+  col = COLORS[3]
+)
 ```
 
 ```{r}
@@ -1082,7 +1147,7 @@ invisible(lapply(
 ))
 ```
 
-```{r plot-sim-A, fig.cap = "Prevalência ao longo do tempo no Cenário A. Linhas são prevalências médias, e áreas são intervalos de prevalência."}
+```{r plot-sim-A, fig.cap = "Prevalência ao longo do tempo no Cenário B. Linhas são prevalências médias, e áreas são intervalos de prevalência."}
 plot(
   sim_A, 
   popfrac = TRUE,
@@ -1092,7 +1157,9 @@ plot(
 )
 ```
 
-Podemos ver a distribuição por turma...
+Existem outras análises interessantes que podem ser feitas a partir do objeto 
+final da simulação. Por exemplo, a prevalência agregada por turma ou raça. 
+Contudo, não exploraremos essas análises neste trabalho.
 
 \subsection{Comparação de cenários}
 
@@ -1155,19 +1222,21 @@ plot(
 
 \chapter{Conclusões e trabalhos futuros}
 
-...
+A implementação do modelo foi bem sucedida, bem como a organização das 
+referências necessárias para entendê-lo. O modelo está disponível no Github 
+para futuras pesquisas e extensões.
+
+O objetivo da monografia foi demonstrar o funcionamento e o contexto do 
+$SEIQHRF$ em redes, e um próximo passo é simular esse modelo nas redes 
+amostradas do Aglomerado da Serra, no projeto *COVID-19: proposta de um modelo
+epidemiológico que incorpora estruturas sociais de contágio*.
 
 \postextual
 \bibliography{bibliography}
 \begin{apendicesenv}
 \partapendices
-\chapter{Código e versionamento}
+\chapter{Código}
 \end{apendicesenv}
 
 ```{r ref.label = knitr::all_labels(), echo = TRUE, eval = FALSE}
 ```
-
-```{r}
-Sys.info()
-```
-
